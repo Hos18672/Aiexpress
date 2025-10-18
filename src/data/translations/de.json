@@ -1,0 +1,96 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "services": "Dienstleistungen",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Verwandeln Sie Ihr Unternehmen mit KI",
+    "subtitle": "KI-Coaching, Workshops und Automatisierungsdienste",
+    "cta": "Loslegen",
+    "tagline": "Unternehmen durch künstliche Intelligenz stärken"
+  },
+  "whyChooseUs": {
+    "title": "Warum wir",
+    "items": [
+      {
+        "title": "KI-Coaching",
+        "description": "Personalisiertes Coaching, um Ihrem Team KI-Technologien zu vermitteln"
+      },
+      {
+        "title": "Workshops",
+        "description": "Interaktive Sitzungen zur Qualifizierung Ihres gesamten Teams"
+      },
+      {
+        "title": "Automatisierung",
+        "description": "Optimierung der Abläufe durch Automatisierung repetitiver Aufgaben"
+      },
+      {
+        "title": "Experten-Schulung",
+        "description": "Lernen Sie von Branchenexperten mit praktischer Erfahrung"
+      },
+      {
+        "title": "Maßgeschneiderte Lösungen",
+        "description": "Individuelle KI-Systeme für Ihre spezifischen Anforderungen"
+      },
+      {
+        "title": "Zukunftssicherheit",
+        "description": "Bleiben Sie mit modernster KI dem Wettbewerb einen Schritt voraus"
+      }
+    ]
+  },
+  "services": {
+    "title": "Unsere Dienstleistungen",
+    "viewDetails": "Details anzeigen",
+    "categories": {
+      "all": "Alle Dienste",
+      "coaching": "Coaching",
+      "workshops": "Workshops",
+      "automation": "Automatisierung"
+    }
+  },
+  "about": {
+    "title": "Über AI Express",
+    "mission": {
+      "title": "Unsere Mission",
+      "description": "Künstliche Intelligenz zu demokratisieren und für Unternehmen aller Größen zugänglich zu machen, damit sie im digitalen Zeitalter erfolgreich sind."
+    },
+    "vision": {
+      "title": "Unsere Vision",
+      "description": "Eine Welt, in der jedes Unternehmen KI nutzt, um Innovation, Effizienz und Wachstum voranzutreiben."
+    },
+    "team": {
+      "title": "Unser Team kennenlernen"
+    }
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Haben Sie Fragen? Kontaktieren Sie unsere KI-Experten",
+    "name": "Name",
+    "email": "E-Mail",
+    "message": "Nachricht",
+    "send": "Nachricht senden",
+    "consultation": "Kostenlose Beratung vereinbaren",
+    "info": {
+      "email": "kontakt@aiexpress.de",
+      "phone": "+49 123 456789",
+      "address": "Technikstraße 123, Berlin, Deutschland"
+    }
+  },
+  "admin": {
+    "login": "Admin Anmeldung",
+    "logout": "Abmelden",
+    "dashboard": "Dashboard",
+    "manage": {
+      "content": "Inhalte verwalten",
+      "services": "Dienstleistungen verwalten",
+      "translations": "Übersetzungen verwalten"
+    }
+  },
+  "footer": {
+    "description": "Transformation von Unternehmen durch bahnbrechende KI-Lösungen. Wir bieten KI-Coaching, Workshops und Automatisierungsdienste für Unternehmensumstellungen.",
+    "rights": "Alle Rechte vorbehalten"
+  }
+}

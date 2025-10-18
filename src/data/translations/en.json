@@ -1,0 +1,96 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Transform Your Business with AI",
+    "subtitle": "AI Coaching, Workshops & Automation Services",
+    "cta": "Get Started",
+    "tagline": "Empowering businesses through artificial intelligence"
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us",
+    "items": [
+      {
+        "title": "AI Coaching",
+        "description": "Personalized coaching to help your team master AI technologies"
+      },
+      {
+        "title": "Workshops",
+        "description": "Interactive sessions to upskill your entire team"
+      },
+      {
+        "title": "Automation",
+        "description": "Streamline operations by automating repetitive tasks"
+      },
+      {
+        "title": "Expert Training",
+        "description": "Learn from industry experts with real-world experience"
+      },
+      {
+        "title": "Tailored Solutions",
+        "description": "Custom AI systems designed for your specific needs"
+      },
+      {
+        "title": "Future-Proofing",
+        "description": "Stay ahead of the competition with cutting-edge AI"
+      }
+    ]
+  },
+  "services": {
+    "title": "Our Services",
+    "viewDetails": "View Details",
+    "categories": {
+      "all": "All Services",
+      "coaching": "Coaching",
+      "workshops": "Workshops",
+      "automation": "Automation"
+    }
+  },
+  "about": {
+    "title": "About AI Express",
+    "mission": {
+      "title": "Our Mission",
+      "description": "To democratize artificial intelligence and make it accessible to businesses of all sizes, enabling them to thrive in the digital age."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "A world where every business leverages AI to drive innovation, efficiency, and growth."
+    },
+    "team": {
+      "title": "Meet Our Team"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions? Get in touch with our AI experts",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "consultation": "Schedule Free Consultation",
+    "info": {
+      "email": "contact@aiexpress.com",
+      "phone": "+1 (555) 123-4567",
+      "address": "123 Tech Street, San Francisco, CA"
+    }
+  },
+  "admin": {
+    "login": "Admin Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "manage": {
+      "content": "Manage Content",
+      "services": "Manage Services",
+      "translations": "Manage Translations"
+    }
+  },
+  "footer": {
+    "description": "Transforming businesses through cutting-edge AI solutions. We provide AI Coaching, Workshops, and Automation Services for business transformation.",
+    "rights": "All rights reserved"
+  }
+}
