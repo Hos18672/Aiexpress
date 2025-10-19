@@ -35,14 +35,26 @@ const enTranslations = {
     tailoredSolutions: "Tailored Solutions",
     futureProofing: "Future-Proofing",
     
+    // Why Choose Us with items structure
+    "whyChooseUs.title": "Why Choose Us",
+    "whyChooseUs.subtitle": "We help businesses leverage AI to drive innovation, efficiency, and exponential growth.",
+    "whyChooseUs.items.0.title": "AI Coaching",
+    "whyChooseUs.items.0.description": "Personalized coaching to help your team master AI technologies",
+    "whyChooseUs.items.1.title": "Workshops",
+    "whyChooseUs.items.1.description": "Interactive sessions to upskill your entire team",
+    "whyChooseUs.items.2.title": "Automation",
+    "whyChooseUs.items.2.description": "Streamline operations by automating repetitive tasks",
+    
     // Services
     ourServices: "Our Services",
     viewDetails: "View Details",
     comprehensiveSolutions: "Comprehensive AI Solutions",
+    "services.tailoredSolutions": "Tailored artificial intelligence solutions designed to transform your business operations",
     
     // Case Studies
     successStories: "Success Stories",
     realResults: "Real Results, Real Impact",
+    "caseStudies.subtitle": "Discover how AI Express has transformed businesses across industries with cutting-edge AI solutions",
     
     // About
     mission: "Mission",
@@ -55,11 +67,14 @@ const enTranslations = {
     
     // Nested About translations
     "about.title": "About AI Express",
+    "about.subtitle": "We are a team of AI experts passionate about transforming businesses through cutting-edge artificial intelligence solutions.",
+    "about.founded": "Founded in 2020, AI Express has helped over 200 companies leverage AI to drive innovation, efficiency, and sustainable growth.",
     "about.mission.title": "Our Mission",
     "about.mission.description": "To democratize artificial intelligence and make it accessible to businesses of all sizes, enabling them to thrive in the digital age.",
     "about.vision.title": "Our Vision",
     "about.vision.description": "A world where every business leverages AI to drive innovation, efficiency, and growth.",
     "about.team.title": "Meet Our Team",
+    "about.team.subtitle": "Our experts bring together decades of experience in AI, machine learning, and business transformation",
     
     // Contact
     contactUs: "Contact Us",
@@ -76,6 +91,7 @@ const enTranslations = {
     "contact.title": "Contact Us",
     "contact.subtitle": "Have questions? Get in touch with our AI experts",
     "contact.consultation": "Schedule Free Consultation",
+    "contact.bookConsultation": "Book a 30-minute consultation with our AI experts to discuss your business needs and opportunities.",
     "contact.info.email": "contact@aiexpress.com",
     "contact.info.phone": "+1 (555) 123-4567",
     "contact.info.address": "123 Tech Street, San Francisco, CA",
@@ -102,6 +118,9 @@ const enTranslations = {
     secureConfidential: "Secure & Confidential",
     quickSetup: "Quick Setup",
     provenResults: "Proven Results",
+    "cta.trustIndicators.secure": "Secure & Confidential",
+    "cta.trustIndicators.quick": "Quick Setup",
+    "cta.trustIndicators.proven": "Proven Results",
     
     // Admin
     adminPanel: "Admin Panel",
@@ -114,6 +133,8 @@ const enTranslations = {
     
     // Footer
     sections: "Sections",
+    "footer.description": "Transforming businesses through cutting-edge AI solutions. We provide AI Coaching, Workshops, and Automation Services for business transformation.",
+    "footer.rights": "All rights reserved",
     
     // Common
     close: "Close",
@@ -155,14 +176,26 @@ const deTranslations = {
     tailoredSolutions: "Maßgeschneiderte Lösungen",
     futureProofing: "Zukunftssicherheit",
     
+    // Warum wir with items structure
+    "whyChooseUs.title": "Warum wir",
+    "whyChooseUs.subtitle": "Wir helfen Unternehmen, KI zu nutzen, um Innovation, Effizienz und exponentielles Wachstum voranzutreiben.",
+    "whyChooseUs.items.0.title": "KI-Coaching",
+    "whyChooseUs.items.0.description": "Personalisiertes Coaching, um Ihrem Team KI-Technologien zu vermitteln",
+    "whyChooseUs.items.1.title": "Workshops",
+    "whyChooseUs.items.1.description": "Interaktive Sitzungen zur Qualifizierung Ihres gesamten Teams",
+    "whyChooseUs.items.2.title": "Automatisierung",
+    "whyChooseUs.items.2.description": "Optimierung der Abläufe durch Automatisierung repetitiver Aufgaben",
+    
     // Services
     ourServices: "Unsere Dienstleistungen",
     viewDetails: "Details anzeigen",
     comprehensiveSolutions: "Umfassende KI-Lösungen",
+    "services.tailoredSolutions": "Maßgeschneiderte KI-Lösungen zur Transformation Ihrer Geschäftsabläufe",
     
     // Case Studies
     successStories: "Erfolgsgeschichten",
     realResults: "Reale Ergebnisse, echte Auswirkungen",
+    "caseStudies.subtitle": "Entdecken Sie, wie AI Express Unternehmen branchenübergreifend mit modernsten KI-Lösungen transformiert hat",
     
     // About
     mission: "Mission",
@@ -175,11 +208,14 @@ const deTranslations = {
     
     // Nested About translations
     "about.title": "Über AI Express",
+    "about.subtitle": "Wir sind ein Team von KI-Experten, die leidenschaftlich daran arbeiten, Unternehmen durch bahnbrechende KI-Lösungen zu transformieren.",
+    "about.founded": "Seit 2020 hat AI Express über 200 Unternehmen dabei geholfen, KI zu nutzen, um Innovation, Effizienz und nachhaltiges Wachstum voranzutreiben.",
     "about.mission.title": "Unsere Mission",
     "about.mission.description": "Künstliche Intelligenz zu demokratisieren und für Unternehmen aller Größen zugänglich zu machen, damit sie im digitalen Zeitalter erfolgreich sind.",
     "about.vision.title": "Unsere Vision",
     "about.vision.description": "Eine Welt, in der jedes Unternehmen KI nutzt, um Innovation, Effizienz und Wachstum voranzutreiben.",
     "about.team.title": "Unser Team kennenlernen",
+    "about.team.subtitle": "Unsere Experten vereinen jahrzehntelange Erfahrung in KI, maschinellem Lernen und Unternehmensumstellung",
     
     // Contact
     contactUs: "Kontaktieren Sie uns",
@@ -196,6 +232,7 @@ const deTranslations = {
     "contact.title": "Kontaktieren Sie uns",
     "contact.subtitle": "Haben Sie Fragen? Kontaktieren Sie unsere KI-Experten",
     "contact.consultation": "Kostenlose Beratung vereinbaren",
+    "contact.bookConsultation": "Buchen Sie eine 30-minütige Beratung mit unseren KI-Experten, um Ihre Geschäftsanforderungen und -möglichkeiten zu besprechen.",
     "contact.info.email": "kontakt@aiexpress.de",
     "contact.info.phone": "+49 123 456789",
     "contact.info.address": "Technikstraße 123, Berlin, Deutschland",
@@ -222,6 +259,9 @@ const deTranslations = {
     secureConfidential: "Sicher & Vertraulich",
     quickSetup: "Schnelle Einrichtung",
     provenResults: "Bewährte Ergebnisse",
+    "cta.trustIndicators.secure": "Sicher & Vertraulich",
+    "cta.trustIndicators.quick": "Schnelle Einrichtung",
+    "cta.trustIndicators.proven": "Bewährte Ergebnisse",
     
     // Admin
     adminPanel: "Admin-Bereich",
@@ -234,6 +274,8 @@ const deTranslations = {
     
     // Footer
     sections: "Abschnitte",
+    "footer.description": "Transformation von Unternehmen durch bahnbrechende KI-Lösungen. Wir bieten KI-Coaching, Workshops und Automatisierungsdienste für Unternehmensumstellungen.",
+    "footer.rights": "Alle Rechte vorbehalten",
     
     // Common
     close: "Schließen",

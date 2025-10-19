@@ -58,16 +58,6 @@ const Home = () => {
       role: "ML Engineer",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
     },
-    {
-      name: "David Chen",
-      role: "Data Scientist",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
-    },
-    {
-      name: "Sarah Williams",
-      role: "AI Strategist",
-      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
-    }
   ];
 
   const caseStudies = [
@@ -120,17 +110,17 @@ const Home = () => {
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6 text-primary" />,
-      title: "Email",
+      title: t('contact.email') || "Email",
       content: t('contact.info.email') || "contact@aiexpress.com"
     },
     {
       icon: <Phone className="w-6 h-6 text-primary" />,
-      title: "Phone",
+      title: t('contact.phone') || "Phone",
       content: t('contact.info.phone') || "+1 (555) 123-4567"
     },
     {
       icon: <MapPin className="w-6 h-6 text-primary" />,
-      title: "Address",
+      title: t('contact.address') || "Address",
       content: t('contact.info.address') || "123 Tech Street, San Francisco, CA"
     }
   ];
@@ -370,20 +360,20 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AICoachingCard 
-              title={t('aiCoaching')}
-              subtitle="Personalized AI Guidance"
+              title={t('whyChooseUs.items.0.title') || "AI Coaching"}
+              subtitle={t('whyChooseUs.items.0.description') || "Personalized coaching to help your team master AI technologies"}
               icon={<Bot className="w-8 h-8 text-white" />}
               accentColor="#64c8ff"
             />
             <AICoachingCard 
-              title={t('workshops')}
-              subtitle="Interactive Learning"
+              title={t('whyChooseUs.items.1.title') || "Workshops"}
+              subtitle={t('whyChooseUs.items.1.description') || "Interactive sessions to upskill your entire team"}
               icon={<Users className="w-8 h-8 text-white" />}
               accentColor="#64c8ff"
             />
             <AICoachingCard 
-              title={t('automation')}
-              subtitle="Streamline Operations"
+              title={t('whyChooseUs.items.2.title') || "Automation"}
+              subtitle={t('whyChooseUs.items.2.description') || "Streamline operations by automating repetitive tasks"}
               icon={<Settings className="w-8 h-8 text-white" />}
               accentColor="#64c8ff"
             />
@@ -561,16 +551,16 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
             <motion.div variants={itemVariants}>
               <AICoachingCard 
-                title={t('about.mission.title')}
-                subtitle="Core Values"
+                title={t('about.mission.title') || "Our Mission"}
+                subtitle={t('about.mission.description') || "To democratize artificial intelligence and make it accessible to businesses of all sizes, enabling them to thrive in the digital age."}
                 icon={<Shield className="w-8 h-8 text-white" />}
                 accentColor="#64c8ff"
               />
             </motion.div>
             <motion.div variants={itemVariants}>
               <AICoachingCard 
-                title={t('about.vision.title')}
-                subtitle="Future Goals"
+                title={t('about.vision.title') || "Our Vision"}
+                subtitle={t('about.vision.description') || "A world where every business leverages AI to drive innovation, efficiency, and growth."}
                 icon={<Eye className="w-8 h-8 text-white" />}
                 accentColor="#64c8ff"
               />
@@ -598,7 +588,7 @@ const Home = () => {
 
             <motion.p
               variants={itemVariants}
-              className="text-gray-400 max-w-3xl mx-auto text-lg"
+              className="text-gray-400 max-w-3xl mx-auto text-lg "
             >
               {t('about.team.subtitle')}
             </motion.p>
@@ -817,15 +807,15 @@ const Home = () => {
             >
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-primary" />
-                <span>{t('secureConfidential')}</span>
+                <span>{t('cta.trustIndicators.secure')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-primary" />
-                <span>{t('quickSetup')}</span>
+                <span>{t('cta.trustIndicators.quick')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-primary" />
-                <span>{t('provenResults')}</span>
+                <span>{t('cta.trustIndicators.proven')}</span>
               </div>
             </motion.div>
           </div>

@@ -109,16 +109,9 @@ const Navbar = () => {
         behavior: 'smooth'
       });
       
-      // Update URL and active states
+      // Update URL hash but don't immediately update active states
       const hash = '#' + sectionId;
       window.history.pushState(null, null, hash);
-      setActiveHash(hash);
-      setActiveSection(sectionId);
-      
-      // Small delay to ensure the scroll completes before updating state
-      setTimeout(() => {
-        setActiveSection(sectionId);
-      }, 100);
       
       return true;
     }
@@ -139,7 +132,6 @@ const Navbar = () => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
           window.history.pushState(null, null, '/');
           setActiveHash('');
-          setActiveSection('home');
         }, 100);
       }
       return;
@@ -148,8 +140,8 @@ const Navbar = () => {
     if (path.startsWith('/#')) {
       const sectionId = path.substring(2);
       
-      // Set the active section immediately when clicking
-      setActiveSection(sectionId);
+      // Set the active hash immediately to prevent other items from becoming active
+      setActiveHash('#' + sectionId);
       
       if (location.pathname === '/') {
         // Already on home page, just scroll after menu animation completes
@@ -159,10 +151,6 @@ const Navbar = () => {
       } else {
         // Navigate to home page first, then scroll
         navigate(`/#${sectionId}`);
-        // Set active section after navigation
-        setTimeout(() => {
-          setActiveSection(sectionId);
-        }, 300);
       }
     } else {
       // Regular navigation
