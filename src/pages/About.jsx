@@ -68,23 +68,23 @@ const About = () => {
   const values = [
     {
       icon: <Lightbulb className="w-6 h-6 text-white" />,
-      title: "Innovation",
-      description: "Pushing boundaries with cutting-edge AI solutions"
+      title: t('about.coreValues.innovation.title'),
+      description: t('about.coreValues.innovation.description')
     },
     {
       icon: <Shield className="w-6 h-6 text-white" />,
-      title: "Trust",
-      description: "Building reliable and ethical AI systems"
+      title: t('about.coreValues.trust.title'),
+      description: t('about.coreValues.trust.description')
     },
     {
       icon: <TrendingUp className="w-6 h-6 text-white" />,
-      title: "Excellence",
-      description: "Delivering exceptional results consistently"
+      title: t('about.coreValues.excellence.title'),
+      description: t('about.coreValues.excellence.description')
     },
     {
       icon: <Users className="w-6 h-6 text-white" />,
-      title: "Collaboration",
-      description: "Working together to achieve success"
+      title: t('about.coreValues.collaboration.title'),
+      description: t('about.coreValues.collaboration.description')
     }
   ];
 
@@ -123,7 +123,7 @@ const About = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-6"
             >
               <Building className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">About AI Express</span>
+              <span className="text-sm font-medium text-primary">{t('about.title')}</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -139,16 +139,16 @@ const About = () => {
                 }}
                 style={{ backgroundSize: '200% 200%' }}
               >
-                {t('about.title') || 'Pioneering AI Innovation'}
+                {t('about.title')}
               </motion.span>
             </h1>
 
             <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-              We are a team of AI experts passionate about transforming businesses through cutting-edge artificial intelligence solutions.
+              {t('about.subtitle')}
             </p>
 
             <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              Founded in 2020, AI Express has helped over 200 companies leverage AI to drive innovation, efficiency, and sustainable growth.
+              {t('about.founded')}
             </p>
 
             {/* Stats */}
@@ -157,9 +157,9 @@ const About = () => {
               className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-800"
             >
               {[
-                { value: '200+', label: 'Clients' },
-                { value: '50+', label: 'Projects' },
-                { value: '5+', label: 'Years' }
+                { value: '200+', label: t('clients') },
+                { value: '50+', label: t('projects') },
+                { value: '5+', label: t('years') }
               ].map((stat, i) => (
                 <div key={i}>
                   <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -212,7 +212,7 @@ const About = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full mb-6"
             >
               <Target className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-accent">Our Purpose</span>
+              <span className="text-sm font-medium text-accent">{t('purpose')}</span>
             </motion.div>
 
             <motion.h2
@@ -220,7 +220,7 @@ const About = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                Mission & Vision
+                {t('missionVision')}
               </span>
             </motion.h2>
           </div>
@@ -254,12 +254,11 @@ const About = () => {
                       <Shield className="w-7 h-7 text-white" />
                     </div>
                     <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                      {t('about.mission.title') || "Our Mission"}
+                      {t('about.mission.title')}
                     </h2>
                   </div>
                   <p className="text-gray-300 text-lg leading-relaxed">
-                    {t('about.mission.description') || 
-                    "To democratize artificial intelligence and make it accessible to businesses of all sizes, enabling them to thrive in the digital age through innovative, ethical, and impactful AI solutions."}
+                    {t('about.mission.description')}
                   </p>
                 </div>
               </Card>
@@ -293,12 +292,11 @@ const About = () => {
                       <Eye className="w-7 h-7 text-white" />
                     </div>
                     <h2 className="text-3xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-                      {t('about.vision.title') || "Our Vision"}
+                      {t('about.vision.title')}
                     </h2>
                   </div>
                   <p className="text-gray-300 text-lg leading-relaxed">
-                    {t('about.vision.description') || 
-                    "A world where every business leverages AI to drive innovation, efficiency, and sustainable growth, creating lasting value for stakeholders and society."}
+                    {t('about.vision.description')}
                   </p>
                 </div>
               </Card>
@@ -324,7 +322,7 @@ const About = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-6"
             >
               <Award className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Core Values</span>
+              <span className="text-sm font-medium text-primary">{t('coreValues')}</span>
             </motion.div>
 
             <motion.h2
@@ -332,7 +330,7 @@ const About = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                What Drives Us
+                {t('whatDrivesUs')}
               </span>
             </motion.h2>
 
@@ -340,7 +338,7 @@ const About = () => {
               variants={itemVariants}
               className="text-gray-400 max-w-3xl mx-auto text-lg"
             >
-              Our values guide everything we do, from how we build AI solutions to how we partner with our clients
+              {t('about.coreValues.subtitle')}
             </motion.p>
           </div>
 
@@ -383,7 +381,7 @@ const About = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full mb-6"
             >
               <Users className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-accent">Our Team</span>
+              <span className="text-sm font-medium text-accent">{t('ourTeam')}</span>
             </motion.div>
 
             <motion.h2
@@ -391,7 +389,7 @@ const About = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                {t('about.team.title') || "Meet Our Experts"}
+                {t('about.team.title')}
               </span>
             </motion.h2>
 
@@ -399,7 +397,7 @@ const About = () => {
               variants={itemVariants}
               className="text-gray-400 max-w-3xl mx-auto text-lg"
             >
-              Our experts bring together decades of experience in AI, machine learning, and business transformation
+              {t('about.team.subtitle')}
             </motion.p>
           </div>
 

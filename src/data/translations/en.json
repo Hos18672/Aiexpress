@@ -4,16 +4,25 @@
     "services": "Services",
     "about": "About",
     "contact": "Contact",
-    "admin": "Admin"
+    "admin": "Admin",
+    "whyChooseUs": "Why Choose Us",
+    "caseStudies": "Case Studies"
   },
   "hero": {
     "title": "Transform Your Business with AI",
     "subtitle": "AI Coaching, Workshops & Automation Services",
     "cta": "Get Started",
-    "tagline": "Empowering businesses through artificial intelligence"
+    "tagline": "Empowering businesses through artificial intelligence",
+    "nextGenSolutions": "Next-Gen AI Solutions"
+  },
+  "stats": {
+    "clients": "Clients",
+    "successRate": "Success Rate",
+    "support": "Support"
   },
   "whyChooseUs": {
     "title": "Why Choose Us",
+    "subtitle": "We help businesses leverage AI to drive innovation, efficiency, and exponential growth.",
     "items": [
       {
         "title": "AI Coaching",
@@ -49,10 +58,19 @@
       "coaching": "Coaching",
       "workshops": "Workshops",
       "automation": "Automation"
-    }
+    },
+    "comprehensiveSolutions": "Comprehensive AI Solutions",
+    "tailoredSolutions": "Tailored artificial intelligence solutions designed to transform your business operations"
+  },
+  "caseStudies": {
+    "title": "Success Stories",
+    "subtitle": "Discover how AI Express has transformed businesses across industries with cutting-edge AI solutions",
+    "realResults": "Real Results, Real Impact"
   },
   "about": {
     "title": "About AI Express",
+    "subtitle": "We are a team of AI experts passionate about transforming businesses through cutting-edge artificial intelligence solutions.",
+    "founded": "Founded in 2020, AI Express has helped over 200 companies leverage AI to drive innovation, efficiency, and sustainable growth.",
     "mission": {
       "title": "Our Mission",
       "description": "To democratize artificial intelligence and make it accessible to businesses of all sizes, enabling them to thrive in the digital age."
@@ -62,8 +80,32 @@
       "description": "A world where every business leverages AI to drive innovation, efficiency, and growth."
     },
     "team": {
-      "title": "Meet Our Team"
-    }
+      "title": "Meet Our Team",
+      "subtitle": "Our experts bring together decades of experience in AI, machine learning, and business transformation"
+    },
+    "coreValues": {
+      "title": "Core Values",
+      "subtitle": "Our values guide everything we do, from how we build AI solutions to how we partner with our clients",
+      "innovation": {
+        "title": "Innovation",
+        "description": "Pushing boundaries with cutting-edge AI solutions"
+      },
+      "trust": {
+        "title": "Trust",
+        "description": "Building reliable and ethical AI systems"
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Delivering exceptional results consistently"
+      },
+      "collaboration": {
+        "title": "Collaboration",
+        "description": "Working together to achieve success"
+      }
+    },
+    "purpose": "Our Purpose",
+    "missionVision": "Mission & Vision",
+    "whatDrivesUs": "What Drives Us"
   },
   "contact": {
     "title": "Contact Us",
@@ -73,10 +115,40 @@
     "message": "Message",
     "send": "Send Message",
     "consultation": "Schedule Free Consultation",
+    "getInTouch": "Get In Touch",
+    "startJourney": "Start Your AI Journey",
+    "connect": "Connect with our AI experts and discover how we can transform your business",
+    "bookConsultation": "Book a 30-minute consultation with our AI experts to discuss your business needs and opportunities.",
+    "scheduleNow": "Schedule Now",
     "info": {
       "email": "contact@aiexpress.com",
       "phone": "+1 (555) 123-4567",
       "address": "123 Tech Street, San Francisco, CA"
+    }
+  },
+  "contactForm": {
+    "identity": "Identity",
+    "dataChannel": "Data Channel",
+    "transmissionContent": "Transmission Content",
+    "enterName": "Enter your name",
+    "enterEmail": "your.email@domain.com",
+    "composeMessage": "Compose your message...",
+    "transmitting": "Transmitting...",
+    "sendTransmission": "Send Transmission",
+    "messageTransmitted": "Message Transmitted",
+    "responseIncoming": "Your message has been received. Response incoming...",
+    "initiateContact": "Initiate Contact",
+    "secureProtocol": "Secure transmission protocol"
+  },
+  "cta": {
+    "title": "Launch Your AI Transformation",
+    "subtitle": "Join hundreds of forward-thinking companies leveraging AI to drive innovation, efficiency, and exponential growth.",
+    "readyToTransform": "Ready to Transform?",
+    "scheduleConsultation": "Schedule Free Consultation",
+    "trustIndicators": {
+      "secure": "Secure & Confidential",
+      "quick": "Quick Setup",
+      "proven": "Proven Results"
     }
   },
   "admin": {
@@ -91,6 +163,16 @@
   },
   "footer": {
     "description": "Transforming businesses through cutting-edge AI solutions. We provide AI Coaching, Workshops, and Automation Services for business transformation.",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "sections": "Sections"
+  },
+  "common": {
+    "close": "Close",
+    "getStarted": "Get Started",
+    "exploreServices": "Explore Services",
+    "clients": "Clients",
+    "projects": "Projects",
+    "years": "Years",
+    "coreValues": "Core Values"
   }
 }

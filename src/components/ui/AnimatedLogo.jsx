@@ -320,10 +320,10 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
 
         {/* Pulsing inner layers */}
         <motion.div
-          className="absolute inset-2 md:inset-3 lg:inset-4 rounded-full bg-gradient-to-b from-cyan-200/80 via-blue-400/60 to-blue-600/80 backdrop-blur-sm"
+          className="absolute inset-2 md:inset-3 lg:inset-4 rounded-full bg-gradient-to-b from-cyan-200/20 via-blue-400/15 to-blue-600/20 backdrop-blur-sm"
           animate={{
             scale: [0.9, 1.1, 0.9],
-            opacity: [0.5, 1, 0.5]
+            opacity: [0.3, 0.6, 0.3]
           }}
           transition={{
             duration: 2.5,
@@ -331,7 +331,7 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
             ease: "easeInOut"
           }}
         >
-          {/* Inner hexagon pattern */}
+          {/* AI Neural Network Pattern */}
           <motion.div
             className="absolute inset-0 flex items-center justify-center"
             animate={{ rotate: 360 }}
@@ -340,22 +340,53 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
             <svg width="100%" height="100%" viewBox="0 0 100 100" className="absolute">
               <defs>
                 <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(165, 243, 252, 0.6)" />
-                  <stop offset="50%" stopColor="rgba(59, 130, 246, 0.4)" />
-                  <stop offset="100%" stopColor="rgba(99, 102, 241, 0.6)" />
+                  <stop offset="0%" stopColor="rgba(165, 243, 252, 0.15)" />
+                  <stop offset="50%" stopColor="rgba(59, 130, 246, 0.1)" />
+                  <stop offset="100%" stopColor="rgba(99, 102, 241, 0.15)" />
                 </linearGradient>
               </defs>
-              <polygon points="50,15 85,32 85,68 50,85 15,68 15,32" fill="url(#hexGradient)" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
+              {/* Neural nodes as stars */}
+              {[
+                [30, 30], [70, 30], [50, 50], [30, 70], [70, 70]
+              ].map(([x, y], i) => {
+                const starPoints = [];
+                for (let j = 0; j < 5; j++) {
+                  const angle = (j * 2 * Math.PI) / 5 - Math.PI / 2;
+                  const outerX = x + 4 * Math.cos(angle);
+                  const outerY = y + 4 * Math.sin(angle);
+                  const innerAngle = angle + Math.PI / 5;
+                  const innerX = x + 1.6 * Math.cos(innerAngle);
+                  const innerY = y + 1.6 * Math.sin(innerAngle);
+                  starPoints.push(`${outerX},${outerY}`);
+                  starPoints.push(`${innerX},${innerY}`);
+                }
+                return (
+                  <polygon
+                    key={`ai-node-${i}`}
+                    points={starPoints.join(' ')}
+                    fill="rgba(165, 243, 252, 0.8)"
+                    stroke="rgba(255, 255, 255, 0.4)"
+                    strokeWidth="0.5"
+                  />
+                );
+              })}
+              {/* Neural connections */}
+              <line x1="30" y1="30" x2="50" y2="50" stroke="rgba(165, 243, 252, 0.3)" strokeWidth="0.5" />
+              <line x1="70" y1="30" x2="50" y2="50" stroke="rgba(165, 243, 252, 0.3)" strokeWidth="0.5" />
+              <line x1="50" y1="50" x2="30" y2="70" stroke="rgba(165, 243, 252, 0.3)" strokeWidth="0.5" />
+              <line x1="50" y1="50" x2="70" y2="70" stroke="rgba(165, 243, 252, 0.3)" strokeWidth="0.5" />
+              <line x1="30" y1="30" x2="70" y2="70" stroke="rgba(165, 243, 252, 0.2)" strokeWidth="0.5" />
+              <line x1="70" y1="30" x2="30" y2="70" stroke="rgba(165, 243, 252, 0.2)" strokeWidth="0.5" />
             </svg>
           </motion.div>
         </motion.div>
 
-        {/* Center star burst */}
+        {/* Center AI brain pulse */}
         <motion.div
           className="absolute inset-1/3 md:inset-2/5 lg:inset-1/3 rounded-full"
           animate={{
             scale: [1, 1.3, 1],
-            opacity: [0.4, 1, 0.4]
+            opacity: [0.3, 0.8, 0.3]
           }}
           transition={{
             duration: 1.5,
@@ -370,6 +401,7 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
                 <stop offset="100%" stopColor="rgba(165, 243, 252, 0)" />
               </radialGradient>
             </defs>
+            {/* Subtle radiating lines */}
             {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
               const angle = (i * Math.PI * 2) / 8;
               const x = 50 + 30 * Math.cos(angle);
@@ -381,12 +413,11 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
                   y1="50"
                   x2={x}
                   y2={y}
-                  stroke="rgba(255, 255, 255, 0.6)"
-                  strokeWidth="0.8"
+                  stroke="rgba(255, 255, 255, 0.3)"
+                  strokeWidth="0.5"
                 />
               );
             })}
-            <circle cx="50" cy="50" r="8" fill="url(#centerGradient)" />
           </svg>
         </motion.div>
       </motion.div>

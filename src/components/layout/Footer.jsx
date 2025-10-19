@@ -34,15 +34,15 @@ const Footer = () => {
 
   const sectionLinks = [
     { name: t('services'), id: 'services', icon: <Settings className="w-4 h-4" /> },
-    { name: "Case Studies", id: 'case-studies', icon: <FileText className="w-4 h-4" /> },
+    { name: t('caseStudies'), id: 'case-studies', icon: <FileText className="w-4 h-4" /> },
     { name: t('about'), id: 'about', icon: <User className="w-4 h-4" /> },
     { name: t('contact'), id: 'contact', icon: <Users className="w-4 h-4" /> }
   ];
 
   const contactInfo = [
-    { icon: <Mail className="w-5 h-5" />, content: "contact@aiexpress.com" },
-    { icon: <Phone className="w-5 h-5" />, content: "+1 (555) 123-4567" },
-    { icon: <MapPin className="w-5 h-5" />, content: "123 Tech Street, San Francisco, CA" }
+    { icon: <Mail className="w-5 h-5" />, content: t('contact.info.email') },
+    { icon: <Phone className="w-5 h-5" />, content: t('contact.info.phone') },
+    { icon: <MapPin className="w-5 h-5" />, content: t('contact.info.address') }
   ];
 
   return (
@@ -65,7 +65,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-gray-400 max-w-md mb-6">
-              Transforming businesses through cutting-edge AI solutions. We provide AI Coaching, Workshops, and Automation Services for business transformation.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
@@ -88,7 +88,7 @@ const Footer = () => {
           >
             <h3 className="text-lg font-semibold mb-4 text-white flex items-center">
               <FileText className="w-5 h-5 mr-2" />
-              Sections
+              {t('sections')}
             </h3>
             <ul className="space-y-2">
               {sectionLinks.map((link, index) => (
@@ -136,7 +136,7 @@ const Footer = () => {
           className="border-t border-gray-800 mt-8 pt-8 text-center"
         >
           <p className="text-gray-500">
-            © {new Date().getFullYear()} AI Express. All rights reserved.
+            © {new Date().getFullYear()} AI Express. {t('footer.rights')}
           </p>
         </motion.div>
       </div>

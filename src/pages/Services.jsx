@@ -14,20 +14,6 @@ const Services = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedService, setSelectedService] = useState(null);
 
-  // Load translations
-  const loadTranslations = () => {
-    try {
-      const enTranslations = require('../data/translations/en.json');
-      const deTranslations = require('../data/translations/de.json');
-      return currentLanguage === 'en' ? enTranslations : deTranslations;
-    } catch (error) {
-      console.error('Error loading translations:', error);
-      return {};
-    }
-  };
-
-  const translations = loadTranslations();
-
   // Filter services by category
   const filteredServices = selectedCategory === 'all' 
     ? servicesData 
@@ -44,7 +30,7 @@ const Services = () => {
             className="text-4xl md:text-5xl font-bold mb-6"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-              {translations.services?.title || t('ourServices')}
+              {t('ourServices')}
             </span>
           </motion.h1>
           <motion.p
@@ -53,7 +39,7 @@ const Services = () => {
             transition={{ delay: 0.1 }}
             className="text-xl text-gray-300"
           >
-            Comprehensive AI solutions tailored to your business needs
+            {t('services.tailoredSolutions')}
           </motion.p>
         </div>
       </SectionWrapper>
@@ -109,7 +95,7 @@ const Services = () => {
                 {selectedService.description[currentLanguage] || selectedService.description.en}
               </p>
               <div className="flex justify-end">
-                <Button onClick={() => setSelectedService(null)}>Close</Button>
+                <Button onClick={() => setSelectedService(null)}>{t('close')}</Button>
               </div>
             </div>
           </motion.div>

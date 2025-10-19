@@ -9,36 +9,22 @@ import ContactForm from '../components/forms/ContactForm';
 const Contact = () => {
   const { t, currentLanguage } = useLanguage();
 
-  // Load translations
-  const loadTranslations = () => {
-    try {
-      const enTranslations = require('../data/translations/en.json');
-      const deTranslations = require('../data/translations/de.json');
-      return currentLanguage === 'en' ? enTranslations : deTranslations;
-    } catch (error) {
-      console.error('Error loading translations:', error);
-      return {};
-    }
-  };
-
-  const translations = loadTranslations();
-
   // Contact info data
   const contactInfo = [
     {
       icon: "📧",
-      title: "Email",
-      content: translations.contact?.info?.email || "contact@aiexpress.com"
+      title: t('email'),
+      content: t('contact.info.email')
     },
     {
       icon: "📱",
-      title: "Phone",
-      content: translations.contact?.info?.phone || "+1 (555) 123-4567"
+      title: t('phone'),
+      content: t('contact.info.phone')
     },
     {
       icon: "📍",
-      title: "Address",
-      content: translations.contact?.info?.address || "123 Tech Street, San Francisco, CA"
+      title: t('address'),
+      content: t('contact.info.address')
     }
   ];
 
@@ -53,7 +39,7 @@ const Contact = () => {
             className="text-4xl md:text-5xl font-bold mb-6"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-              {translations.contact?.title || t('contactUs')}
+              {t('contact.title')}
             </span>
           </motion.h1>
           <motion.p
@@ -62,7 +48,7 @@ const Contact = () => {
             transition={{ delay: 0.1 }}
             className="text-xl text-gray-300"
           >
-            {translations.contact?.subtitle || "Have questions? Get in touch with our AI experts"}
+            {t('contact.subtitle')}
           </motion.p>
         </div>
       </SectionWrapper>
@@ -87,12 +73,12 @@ const Contact = () => {
             <div className="space-y-8">
               <Card className="p-8 text-center">
                 <h2 className="text-2xl font-bold mb-4">
-                  {translations.contact?.consultation || "Schedule Free Consultation"}
+                  {t('contact.consultation')}
                 </h2>
                 <p className="text-gray-300 mb-6">
-                  Book a 30-minute consultation with our AI experts to discuss your business needs.
+                  {t('contact.bookConsultation')}
                 </p>
-                <Button size="lg">Book Now</Button>
+                <Button size="lg">{t('scheduleNow')}</Button>
               </Card>
 
               <div className="space-y-6">

@@ -5,8 +5,10 @@ import Card from '../ui/Card';
 import { api } from '../../utils/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { User, Mail, MessageSquare, Send, Zap } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ContactForm = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -140,10 +142,10 @@ const ContactForm = () => {
                 <Send className="w-10 h-10 text-green-400" />
               </motion.div>
               <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Message Transmitted
+                {t('messageTransmitted')}
               </h3>
               <p className="text-gray-400 text-lg">
-                Your message has been received. Response incoming...
+                {t('responseIncoming')}
               </p>
             </motion.div>
           ) : (
@@ -159,9 +161,9 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    Initiate Contact
+                    {t('initiateContact')}
                   </h2>
-                  <p className="text-primary/80 text-sm">Secure transmission protocol</p>
+                  <p className="text-primary/80 text-sm">{t('secureProtocol')}</p>
                 </div>
               </motion.div>
 
@@ -179,7 +181,7 @@ const ContactForm = () => {
                     animate={focusedField === 'name' ? 'focus' : 'idle'}
                   >
                     <User className="w-4 h-4 mr-2 text-primary" />
-                    Identity
+                    {t('identity')}
                   </motion.label>
                   <div className="relative">
                     <input
@@ -195,7 +197,7 @@ const ContactForm = () => {
                                focus:outline-none focus:border-primary focus:bg-gray-800/80
                                transition-all duration-300 backdrop-blur-sm
                                hover:border-gray-600 text-white placeholder-gray-500"
-                      placeholder="Enter your name"
+                      placeholder={t('enterName')}
                     />
                     {focusedField === 'name' && (
                       <motion.div
@@ -221,7 +223,7 @@ const ContactForm = () => {
                     animate={focusedField === 'email' ? 'focus' : 'idle'}
                   >
                     <Mail className="w-4 h-4 mr-2 text-primary" />
-                    Data Channel
+                    {t('dataChannel')}
                   </motion.label>
                   <div className="relative">
                     <input
@@ -237,7 +239,7 @@ const ContactForm = () => {
                                focus:outline-none focus:border-primary focus:bg-gray-800/80
                                transition-all duration-300 backdrop-blur-sm
                                hover:border-gray-600 text-white placeholder-gray-500"
-                      placeholder="your.email@domain.com"
+                      placeholder={t('enterEmail')}
                     />
                     {focusedField === 'email' && (
                       <motion.div
@@ -263,7 +265,7 @@ const ContactForm = () => {
                     animate={focusedField === 'message' ? 'focus' : 'idle'}
                   >
                     <MessageSquare className="w-4 h-4 mr-2 text-primary" />
-                    Transmission Content
+                    {t('transmissionContent')}
                   </motion.label>
                   <div className="relative">
                     <textarea
@@ -279,7 +281,7 @@ const ContactForm = () => {
                                focus:outline-none focus:border-primary focus:bg-gray-800/80
                                transition-all duration-300 backdrop-blur-sm resize-none
                                hover:border-gray-600 text-white placeholder-gray-500"
-                      placeholder="Compose your message..."
+                      placeholder={t('composeMessage')}
                     />
                     {focusedField === 'message' && (
                       <motion.div
@@ -294,7 +296,7 @@ const ContactForm = () => {
                 
                 {/* Submit Button */}
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button 
@@ -314,12 +316,12 @@ const ContactForm = () => {
                     {isSubmitting ? (
                       <div className="flex items-center justify-center relative z-10">
                         <LoadingSpinner size="sm" className="mr-3" />
-                        <span>Transmitting...</span>
+                        <span>{t('transmitting')}</span>
                       </div>
                     ) : (
                       <div className="flex items-center justify-center relative z-10">
                         <Send className="w-5 h-5 mr-3" />
-                        <span>Send Transmission</span>
+                        <span>{t('sendTransmission')}</span>
                       </div>
                     )}
                   </Button>

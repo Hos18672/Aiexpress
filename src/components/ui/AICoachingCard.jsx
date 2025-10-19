@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function AICoachingCard({
   title = "AI Coaching",
@@ -26,66 +27,76 @@ export default function AICoachingCard({
 
     const generateShapes = () => {
       shapesRef.current = [];
-      const w = canvas.width;
-      const h = canvas.height;
-      const shapeCount = 5 + Math.floor(Math.random() * 4);
+      const w = canvas.width + 300;
+      const h = canvas.height + 200;
+      const lineCount = 10 + Math.floor(Math.random() * 10);
 
-      for (let i = 0; i < shapeCount; i++) {
-        const shapeType = Math.floor(Math.random() * 2); // Only circles and squares
-        const randomX = Math.random() * w;
-        const randomY = Math.random() * h;
+      // Generate random lines
+      for (let i = 0; i < lineCount; i++) {
+        const x1 = Math.random() * w;
+        const y1 = Math.random() * h;
+        const angle = Math.random() * Math.PI * 2;
+        const length = Math.random() * 100 + 50;
+        const x2 = x1 + Math.cos(angle) * length;
+        const y2 = y1 + Math.sin(angle) * length;
         
         shapesRef.current.push({
-          baseX: randomX,
-          baseY: randomY,
-          size: Math.random() * 80 + 60,
-          baseOpacity: Math.random() * 0.08 + 0.04,
-          shapeType: shapeType,
-          rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() - 0.5) * 0.003,
-          floatSpeed: Math.random() * 0.08 + 0.04,
-          floatAmount: Math.random() * 40 + 20,
-          phase: Math.random() * Math.PI * 2
+          x1: x1,
+          y1: y1,
+          x2: x2,
+          y2: y2,
+          baseOpacity: Math.random() * 0.4 + 0.2,
+          rotationSpeed: (Math.random() - 0.5) * 0.0005,
+          pulseSpeed: Math.random() * 0.002 + 0.001,
+          phase: Math.random() * Math.PI * 2,
+          centerX: (x1 + x2) / 2,
+          centerY: (y1 + y2) / 2
         });
       }
     };
 
     const drawShape = (shape, time) => {
-      const floatX = Math.sin(time * shape.floatSpeed * 0.0005 + shape.phase) * shape.floatAmount;
-      const floatY = Math.cos(time * shape.floatSpeed * 0.0005 + shape.phase) * shape.floatAmount;
-
-      const x = shape.baseX + floatX;
-      const y = shape.baseY + floatY;
-
-      const opacityPulse = Math.sin(time * 0.0008 + shape.phase) * 0.4 + 0.8;
+      const opacityPulse = Math.sin(time * shape.pulseSpeed + shape.phase) * 0.3 + 0.7;
       const opacity = shape.baseOpacity * opacityPulse;
 
-      ctx.fillStyle = `rgba(100, 200, 255, ${opacity * 0.5})`;
-      ctx.strokeStyle = `rgba(100, 200, 255, ${opacity})`;
+      // Rotate the line around its center
+      const rotation = time * shape.rotationSpeed;
+      
+      const dx1 = shape.x1 - shape.centerX;
+      const dy1 = shape.y1 - shape.centerY;
+      const dx2 = shape.x2 - shape.centerX;
+      const dy2 = shape.y2 - shape.centerY;
+      
+      const cos = Math.cos(rotation);
+      const sin = Math.sin(rotation);
+      
+      const rotatedX1 = dx1 * cos - dy1 * sin + shape.centerX;
+      const rotatedY1 = dx1 * sin + dy1 * cos + shape.centerY;
+      const rotatedX2 = dx2 * cos - dy2 * sin + shape.centerX;
+      const rotatedY2 = dx2 * sin + dy2 * cos + shape.centerY;
+
+      // Draw the line
+      ctx.beginPath();
+      ctx.moveTo(rotatedX1, rotatedY1);
+      ctx.lineTo(rotatedX2, rotatedY2);
+      
+      // Create gradient along the line
+      const gradient = ctx.createLinearGradient(rotatedX1, rotatedY1, rotatedX2, rotatedY2);
+      gradient.addColorStop(0, `rgba(100, 200, 255, ${opacity * 0.3})`);
+      gradient.addColorStop(0.5, `rgba(100, 200, 255, ${opacity})`);
+      gradient.addColorStop(1, `rgba(100, 200, 255, ${opacity * 0.3})`);
+      
+      ctx.strokeStyle = gradient;
       ctx.lineWidth = 2;
-
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(shape.rotation + time * shape.rotationSpeed * 0.0005);
-
-      if (shape.shapeType === 0) {
-        // Circle
-        ctx.beginPath();
-        ctx.arc(0, 0, shape.size / 2, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
-      } else {
-        // Square
-        ctx.fillRect(-shape.size / 2, -shape.size / 2, shape.size, shape.size);
-        ctx.strokeRect(-shape.size / 2, -shape.size / 2, shape.size, shape.size);
-      }
-
-      ctx.restore();
+      ctx.stroke();
     };
 
     const animate = (time) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw all lines
       shapesRef.current.forEach(shape => drawShape(shape, time));
+      
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -115,6 +126,38 @@ export default function AICoachingCard({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
+        {/* Animated border - only on hover - single continuous line */}
+        {isHovered && (
+          <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl">
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="movingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="rgba(100, 200, 255, 0)" />
+                  <stop offset="30%" stopColor="rgba(100, 200, 255, 0)" />
+                  <stop offset="50%" stopColor="rgba(100, 200, 255, 1)" />
+                  <stop offset="70%" stopColor="rgba(100, 200, 255, 0)" />
+                  <stop offset="100%" stopColor="rgba(100, 200, 255, 0)" />
+                </linearGradient>
+              </defs>
+              <motion.path
+                d="M 2,2 L 98,2 L 98,98 L 2,98 Z"
+                fill="none"
+                stroke="url(#movingGradient)"
+                strokeWidth="0.5"
+                strokeLinecap="round"
+                strokeDasharray="40 360"
+                initial={{ strokeDashoffset: 0 }}
+                animate={{ strokeDashoffset: -400 }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            </svg>
+          </div>
+        )}
+
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full"
@@ -125,7 +168,7 @@ export default function AICoachingCard({
 
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
           <div 
-            className="mb-6 sm:mb-8 flex h-14 w-1 sm:h-16 sm:w-1 md:h-2 md:w-2 items-center justify-center rounded-full text-white shadow-xl transition-all duration-500 hover:scale-110"
+            className="mb-6 sm:mb-8 flex h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 items-center justify-center rounded-full text-4xl sm:text-5xl md:text-6xl text-white shadow-xl transition-all duration-500 hover:scale-110"
             style={{
               boxShadow: isHovered 
                 ? `0 0 40px rgba(79,156,255,0.8), 0 0 80px rgba(79,156,255,0.4)` 
@@ -154,7 +197,7 @@ export default function AICoachingCard({
           </p>
 
           <div 
-            className="h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent transition-all duration-500"
+            className="h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-500"
             style={{
               width: isHovered ? '60px' : '40px',
             }}

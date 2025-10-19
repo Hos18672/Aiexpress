@@ -9,11 +9,22 @@ const enTranslations = {
     services: "Services",
     about: "About",
     contact: "Contact",
+    whyChooseUs: "Why Choose Us",
+    caseStudies: "Case Studies",
     
     // Hero Section
     heroTitle: "Transform Your Business with AI",
     heroSubtitle: "AI Coaching, Workshops & Automation Services",
+    hero: {
+      tagline: "Empowering businesses through artificial intelligence"
+    },
     getStarted: "Get Started",
+    nextGenSolutions: "Next-Gen AI Solutions",
+    
+    // Stats
+    clients: "Clients",
+    successRate: "Success Rate",
+    support: "Support",
     
     // Why Choose Us
     whyChooseUs: "Why Choose Us",
@@ -27,11 +38,20 @@ const enTranslations = {
     // Services
     ourServices: "Our Services",
     viewDetails: "View Details",
+    comprehensiveSolutions: "Comprehensive AI Solutions",
+    
+    // Case Studies
+    successStories: "Success Stories",
+    realResults: "Real Results, Real Impact",
     
     // About
     mission: "Mission",
     vision: "Vision",
     ourTeam: "Our Team",
+    coreValues: "Core Values",
+    purpose: "Our Purpose",
+    missionVision: "Mission & Vision",
+    whatDrivesUs: "What Drives Us",
     
     // Nested About translations
     "about.title": "About AI Express",
@@ -48,6 +68,9 @@ const enTranslations = {
     message: "Message",
     sendMessage: "Send Message",
     scheduleConsultation: "Schedule Free Consultation",
+    getInTouch: "Get In Touch",
+    startJourney: "Start Your AI Journey",
+    scheduleNow: "Schedule Now",
     
     // Contact with nested structure
     "contact.title": "Contact Us",
@@ -57,6 +80,29 @@ const enTranslations = {
     "contact.info.phone": "+1 (555) 123-4567",
     "contact.info.address": "123 Tech Street, San Francisco, CA",
     
+    // Contact Form
+    identity: "Identity",
+    dataChannel: "Data Channel",
+    transmissionContent: "Transmission Content",
+    enterName: "Enter your name",
+    enterEmail: "your.email@domain.com",
+    composeMessage: "Compose your message...",
+    transmitting: "Transmitting...",
+    sendTransmission: "Send Transmission",
+    messageTransmitted: "Message Transmitted",
+    responseIncoming: "Your message has been received. Response incoming...",
+    initiateContact: "Initiate Contact",
+    secureProtocol: "Secure transmission protocol",
+    
+    // CTA
+    launchTransformation: "Launch Your AI Transformation",
+    joinCompanies: "Join hundreds of forward-thinking companies leveraging AI to drive innovation, efficiency, and exponential growth.",
+    readyToTransform: "Ready to Transform?",
+    scheduleFreeConsultation: "Schedule Free Consultation",
+    secureConfidential: "Secure & Confidential",
+    quickSetup: "Quick Setup",
+    provenResults: "Proven Results",
+    
     // Admin
     adminPanel: "Admin Panel",
     login: "Login",
@@ -64,7 +110,14 @@ const enTranslations = {
     dashboard: "Dashboard",
     manageContent: "Manage Content",
     manageServices: "Manage Services",
-    manageTranslations: "Manage Translations"
+    manageTranslations: "Manage Translations",
+    
+    // Footer
+    sections: "Sections",
+    
+    // Common
+    close: "Close",
+    exploreServices: "Explore Services"
   }
 };
 
@@ -76,11 +129,22 @@ const deTranslations = {
     services: "Dienstleistungen",
     about: "Über uns",
     contact: "Kontakt",
+    whyChooseUs: "Warum wir",
+    caseStudies: "Fallstudien",
     
     // Hero Section
     heroTitle: "Verwandeln Sie Ihr Unternehmen mit KI",
     heroSubtitle: "KI-Coaching, Workshops und Automatisierungsdienste",
+    hero: {
+      tagline: "Unternehmen durch künstliche Intelligenz stärken"
+    },
     getStarted: "Loslegen",
+    nextGenSolutions: "Next-Gen KI-Lösungen",
+    
+    // Stats
+    clients: "Kunden",
+    successRate: "Erfolgsrate",
+    support: "Support",
     
     // Why Choose Us
     whyChooseUs: "Warum wir",
@@ -94,11 +158,20 @@ const deTranslations = {
     // Services
     ourServices: "Unsere Dienstleistungen",
     viewDetails: "Details anzeigen",
+    comprehensiveSolutions: "Umfassende KI-Lösungen",
+    
+    // Case Studies
+    successStories: "Erfolgsgeschichten",
+    realResults: "Reale Ergebnisse, echte Auswirkungen",
     
     // About
     mission: "Mission",
     vision: "Vision",
     ourTeam: "Unser Team",
+    coreValues: "Kernwerte",
+    purpose: "Unser Zweck",
+    missionVision: "Mission & Vision",
+    whatDrivesUs: "Was uns antreibt",
     
     // Nested About translations
     "about.title": "Über AI Express",
@@ -115,6 +188,9 @@ const deTranslations = {
     message: "Nachricht",
     sendMessage: "Nachricht senden",
     scheduleConsultation: "Kostenlose Beratung vereinbaren",
+    getInTouch: "Kontakt aufnehmen",
+    startJourney: "Beginnen Sie Ihre KI-Reise",
+    scheduleNow: "Jetzt vereinbaren",
     
     // Contact with nested structure
     "contact.title": "Kontaktieren Sie uns",
@@ -124,6 +200,29 @@ const deTranslations = {
     "contact.info.phone": "+49 123 456789",
     "contact.info.address": "Technikstraße 123, Berlin, Deutschland",
     
+    // Contact Form
+    identity: "Identität",
+    dataChannel: "Datenkanal",
+    transmissionContent: "Übertragungsinhalt",
+    enterName: "Geben Sie Ihren Namen ein",
+    enterEmail: "ihre.email@domain.de",
+    composeMessage: "Verfassen Sie Ihre Nachricht...",
+    transmitting: "Übertragung...",
+    sendTransmission: "Senden",
+    messageTransmitted: "Nachricht gesendet",
+    responseIncoming: "Ihre Nachricht wurde empfangen. Antwort unterwegs...",
+    initiateContact: "Kontakt aufnehmen",
+    secureProtocol: "Sicherer Übertragungsprotokoll",
+    
+    // CTA
+    launchTransformation: "Starten Sie Ihre KI-Transformation",
+    joinCompanies: "Schließen Sie sich hunderten von zukunftsorientierten Unternehmen an, die KI nutzen, um Innovation, Effizienz und exponentielles Wachstum voranzutreiben.",
+    readyToTransform: "Bereit für die Transformation?",
+    scheduleFreeConsultation: "Kostenlose Beratung vereinbaren",
+    secureConfidential: "Sicher & Vertraulich",
+    quickSetup: "Schnelle Einrichtung",
+    provenResults: "Bewährte Ergebnisse",
+    
     // Admin
     adminPanel: "Admin-Bereich",
     login: "Anmelden",
@@ -131,7 +230,14 @@ const deTranslations = {
     dashboard: "Dashboard",
     manageContent: "Inhalte verwalten",
     manageServices: "Dienstleistungen verwalten",
-    manageTranslations: "Übersetzungen verwalten"
+    manageTranslations: "Übersetzungen verwalten",
+    
+    // Footer
+    sections: "Abschnitte",
+    
+    // Common
+    close: "Schließen",
+    exploreServices: "Dienste erkunden"
   }
 };
 

@@ -4,16 +4,25 @@
     "services": "Dienstleistungen",
     "about": "Über uns",
     "contact": "Kontakt",
-    "admin": "Admin"
+    "admin": "Admin",
+    "whyChooseUs": "Warum wir",
+    "caseStudies": "Fallstudien"
   },
   "hero": {
     "title": "Verwandeln Sie Ihr Unternehmen mit KI",
     "subtitle": "KI-Coaching, Workshops und Automatisierungsdienste",
     "cta": "Loslegen",
-    "tagline": "Unternehmen durch künstliche Intelligenz stärken"
+    "tagline": "Unternehmen durch künstliche Intelligenz stärken",
+    "nextGenSolutions": "Next-Gen KI-Lösungen"
+  },
+  "stats": {
+    "clients": "Kunden",
+    "successRate": "Erfolgsrate",
+    "support": "Support"
   },
   "whyChooseUs": {
     "title": "Warum wir",
+    "subtitle": "Wir helfen Unternehmen, KI zu nutzen, um Innovation, Effizienz und exponentielles Wachstum voranzutreiben.",
     "items": [
       {
         "title": "KI-Coaching",
@@ -49,10 +58,19 @@
       "coaching": "Coaching",
       "workshops": "Workshops",
       "automation": "Automatisierung"
-    }
+    },
+    "comprehensiveSolutions": "Umfassende KI-Lösungen",
+    "tailoredSolutions": "Maßgeschneiderte KI-Lösungen zur Transformation Ihrer Geschäftsabläufe"
+  },
+  "caseStudies": {
+    "title": "Erfolgsgeschichten",
+    "subtitle": "Entdecken Sie, wie AI Express Unternehmen branchenübergreifend mit modernsten KI-Lösungen transformiert hat",
+    "realResults": "Reale Ergebnisse, echte Auswirkungen"
   },
   "about": {
     "title": "Über AI Express",
+    "subtitle": "Wir sind ein Team von KI-Experten, die leidenschaftlich daran arbeiten, Unternehmen durch bahnbrechende KI-Lösungen zu transformieren.",
+    "founded": "Seit 2020 hat AI Express über 200 Unternehmen dabei geholfen, KI zu nutzen, um Innovation, Effizienz und nachhaltiges Wachstum voranzutreiben.",
     "mission": {
       "title": "Unsere Mission",
       "description": "Künstliche Intelligenz zu demokratisieren und für Unternehmen aller Größen zugänglich zu machen, damit sie im digitalen Zeitalter erfolgreich sind."
@@ -62,8 +80,32 @@
       "description": "Eine Welt, in der jedes Unternehmen KI nutzt, um Innovation, Effizienz und Wachstum voranzutreiben."
     },
     "team": {
-      "title": "Unser Team kennenlernen"
-    }
+      "title": "Unser Team kennenlernen",
+      "subtitle": "Unsere Experten vereinen jahrzehntelange Erfahrung in KI, maschinellem Lernen und Unternehmensumstellung"
+    },
+    "coreValues": {
+      "title": "Kernwerte",
+      "subtitle": "Unsere Werte leiten alles, was wir tun - von der Entwicklung von KI-Lösungen bis zur Partnerschaft mit unseren Kunden",
+      "innovation": {
+        "title": "Innovation",
+        "description": "Grenzen mit modernsten KI-Lösungen verschieben"
+      },
+      "trust": {
+        "title": "Vertrauen",
+        "description": "Zuverlässige und ethische KI-Systeme aufbauen"
+      },
+      "excellence": {
+        "title": "Exzellenz",
+        "description": "Konsequent außergewöhnliche Ergebnisse liefern"
+      },
+      "collaboration": {
+        "title": "Zusammenarbeit",
+        "description": "Gemeinsam Erfolg erzielen"
+      }
+    },
+    "purpose": "Unser Zweck",
+    "missionVision": "Mission & Vision",
+    "whatDrivesUs": "Was uns antreibt"
   },
   "contact": {
     "title": "Kontaktieren Sie uns",
@@ -73,10 +115,40 @@
     "message": "Nachricht",
     "send": "Nachricht senden",
     "consultation": "Kostenlose Beratung vereinbaren",
+    "getInTouch": "Kontakt aufnehmen",
+    "startJourney": "Beginnen Sie Ihre KI-Reise",
+    "connect": "Verbinden Sie sich mit unseren KI-Experten und entdecken Sie, wie wir Ihr Unternehmen transformieren können",
+    "bookConsultation": "Buchen Sie eine 30-minütige Beratung mit unseren KI-Experten, um Ihre Geschäftsanforderungen und -möglichkeiten zu besprechen.",
+    "scheduleNow": "Jetzt vereinbaren",
     "info": {
       "email": "kontakt@aiexpress.de",
       "phone": "+49 123 456789",
       "address": "Technikstraße 123, Berlin, Deutschland"
+    }
+  },
+  "contactForm": {
+    "identity": "Identität",
+    "dataChannel": "Datenkanal",
+    "transmissionContent": "Übertragungsinhalt",
+    "enterName": "Geben Sie Ihren Namen ein",
+    "enterEmail": "ihre.email@domain.de",
+    "composeMessage": "Verfassen Sie Ihre Nachricht...",
+    "transmitting": "Übertragung...",
+    "sendTransmission": "Senden",
+    "messageTransmitted": "Nachricht gesendet",
+    "responseIncoming": "Ihre Nachricht wurde empfangen. Antwort unterwegs...",
+    "initiateContact": "Kontakt aufnehmen",
+    "secureProtocol": "Sicherer Übertragungsprotokoll"
+  },
+  "cta": {
+    "title": "Starten Sie Ihre KI-Transformation",
+    "subtitle": "Schließen Sie sich hunderten von zukunftsorientierten Unternehmen an, die KI nutzen, um Innovation, Effizienz und exponentielles Wachstum voranzutreiben.",
+    "readyToTransform": "Bereit für die Transformation?",
+    "scheduleConsultation": "Kostenlose Beratung vereinbaren",
+    "trustIndicators": {
+      "secure": "Sicher & Vertraulich",
+      "quick": "Schnelle Einrichtung",
+      "proven": "Bewährte Ergebnisse"
     }
   },
   "admin": {
@@ -91,6 +163,16 @@
   },
   "footer": {
     "description": "Transformation von Unternehmen durch bahnbrechende KI-Lösungen. Wir bieten KI-Coaching, Workshops und Automatisierungsdienste für Unternehmensumstellungen.",
-    "rights": "Alle Rechte vorbehalten"
+    "rights": "Alle Rechte vorbehalten",
+    "sections": "Abschnitte"
+  },
+  "common": {
+    "close": "Schließen",
+    "getStarted": "Loslegen",
+    "exploreServices": "Dienste erkunden",
+    "clients": "Kunden",
+    "projects": "Projekte",
+    "years": "Jahre",
+    "coreValues": "Kernwerte"
   }
 }

@@ -121,19 +121,38 @@ const Home = () => {
     {
       icon: <Mail className="w-6 h-6 text-primary" />,
       title: "Email",
-      content: t('contact.email') || "contact@aiexpress.com"
+      content: t('contact.info.email') || "contact@aiexpress.com"
     },
     {
       icon: <Phone className="w-6 h-6 text-primary" />,
       title: "Phone",
-      content: t('contact.phone') || "+1 (555) 123-4567"
+      content: t('contact.info.phone') || "+1 (555) 123-4567"
     },
     {
       icon: <MapPin className="w-6 h-6 text-primary" />,
       title: "Address",
-      content: t('contact.address') || "123 Tech Street, San Francisco, CA"
+      content: t('contact.info.address') || "123 Tech Street, San Francisco, CA"
     }
   ];
+
+  // Function to scroll to a section
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Update URL hash
+      const hash = '#' + sectionId;
+      window.history.pushState(null, null, hash);
+    }
+  };
 
   // Animation variants
   const containerVariants = {
@@ -200,7 +219,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-6"
             >
               <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Next-Gen AI Solutions</span>
+              <span className="text-sm font-medium text-primary">{t('nextGenSolutions')}</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -216,16 +235,16 @@ const Home = () => {
                 }}
                 style={{ backgroundSize: '200% 200%' }}
               >
-                {t('heroTitle') || 'Transform Your Business'}
+                {t('heroTitle')}
               </motion.span>
             </h1>
 
             <p className="text-xl text-gray-300 mb-6 max-w-2xl leading-relaxed">
-              {t('heroSubtitle') || 'Unlock the power of artificial intelligence'}
+              {t('heroSubtitle')}
             </p>
 
             <p className="text-gray-400 mb-10 max-w-2xl text-lg">
-              {t('heroTagline') || "Empowering businesses through artificial intelligence"}
+              {t('hero.tagline')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -233,7 +252,11 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" className="px-10 py-4 text-lg relative overflow-hidden group bg-gradient-to-r from-primary to-accent">
+                <Button 
+                  onClick={() => scrollToSection('contact')}
+                  size="lg" 
+                  className="px-10 py-4 text-lg relative overflow-hidden group bg-gradient-to-r from-primary to-accent"
+                >
                   <motion.div
                     className="absolute inset-0 bg-white/20"
                     initial={{ x: '-100%' }}
@@ -242,7 +265,7 @@ const Home = () => {
                   />
                   <span className="relative z-10 flex items-center">
                     <Rocket className="w-5 h-5 mr-2" />
-                    {t('getStarted') || 'Get Started'}
+                    {t('getStarted')}
                   </span>
                 </Button>
               </motion.div>
@@ -251,9 +274,14 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button variant="outline" size="lg" className="px-10 py-4 text-lg border-2 border-primary/50 hover:border-primary hover:bg-primary/10">
+                <Button 
+                  onClick={() => scrollToSection('services')}
+                  variant="outline" 
+                  size="lg" 
+                  className="px-10 py-4 text-lg border-2 border-primary/50 hover:border-primary hover:bg-primary/10"
+                >
                   <Globe className="w-5 h-5 mr-2" />
-                  {t('ourServices') || 'Explore Services'}
+                  {t('exploreServices')}
                 </Button>
               </motion.div>
             </div>
@@ -264,9 +292,9 @@ const Home = () => {
               className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-800"
             >
               {[
-                { value: '200+', label: 'Clients' },
-                { value: '98%', label: 'Success Rate' },
-                { value: '24/7', label: 'Support' }
+                { value: '200+', label: t('clients') },
+                { value: '98%', label: t('successRate') },
+                { value: '24/7', label: t('support') }
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -320,7 +348,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-6"
             >
               <Zap className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Why Choose Us</span>
+              <span className="text-sm font-medium text-primary">{t('whyChooseUs')}</span>
             </motion.div>
 
             <motion.h2
@@ -328,7 +356,7 @@ const Home = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                {t('whyChooseUs') || 'Cutting-Edge AI Solutions'}
+                {t('whyChooseUs.title')}
               </span>
             </motion.h2>
 
@@ -336,7 +364,7 @@ const Home = () => {
               variants={itemVariants}
               className="text-gray-400 max-w-3xl mx-auto text-lg"
             >
-              We help businesses leverage AI to drive innovation, efficiency, and exponential growth.
+              {t('whyChooseUs.subtitle')}
             </motion.p>
           </div>
 
@@ -380,7 +408,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full mb-6"
             >
               <Target className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-accent">Our Services</span>
+              <span className="text-sm font-medium text-accent">{t('ourServices')}</span>
             </motion.div>
 
             <motion.h2
@@ -388,7 +416,7 @@ const Home = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                {t('ourServices') || 'Comprehensive AI Solutions'}
+                {t('comprehensiveSolutions')}
               </span>
             </motion.h2>
 
@@ -396,7 +424,7 @@ const Home = () => {
               variants={itemVariants}
               className="text-gray-400 max-w-3xl mx-auto text-lg"
             >
-              Tailored artificial intelligence solutions designed to transform your business operations
+              {t('services.tailoredSolutions')}
             </motion.p>
           </div>
 
@@ -435,7 +463,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-6"
             >
               <TrendingUp className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Success Stories</span>
+              <span className="text-sm font-medium text-primary">{t('successStories')}</span>
             </motion.div>
 
             <motion.h2
@@ -443,7 +471,7 @@ const Home = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                Real Results, Real Impact
+                {t('realResults')}
               </span>
             </motion.h2>
 
@@ -451,7 +479,7 @@ const Home = () => {
               variants={itemVariants}
               className="text-gray-400 max-w-3xl mx-auto text-lg"
             >
-              Discover how AI Express has transformed businesses across industries with cutting-edge AI solutions
+              {t('caseStudies.subtitle')}
             </motion.p>
           </div>
 
@@ -487,21 +515,21 @@ const Home = () => {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full mb-6"
               >
                 <Building className="w-4 h-4 text-accent" />
-                <span className="text-sm font-medium text-accent">About Us</span>
+                <span className="text-sm font-medium text-accent">{t('about')}</span>
               </motion.div>
 
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                  {t('about.title') || 'Pioneering AI Innovation'}
+                  {t('about.title')}
                 </span>
               </h2>
 
               <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-                We are a team of AI experts passionate about transforming businesses through cutting-edge artificial intelligence solutions.
+                {t('about.subtitle')}
               </p>
 
               <p className="text-gray-400 text-lg leading-relaxed">
-                Founded in 2020, AI Express has helped over 200 companies leverage AI to drive innovation, efficiency, and sustainable growth.
+                {t('about.founded')}
               </p>
             </motion.div>
             
@@ -523,7 +551,7 @@ const Home = () => {
               >
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-accent/30 to-primary/30 blur-3xl rounded-full" />
-                  <AnimatedLogo size="lg" />
+                  <AnimatedLogo size="md" />
                 </div>
               </motion.div>
             </motion.div>
@@ -533,7 +561,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
             <motion.div variants={itemVariants}>
               <AICoachingCard 
-                title={t('about.mission.title') || "Our Mission"}
+                title={t('about.mission.title')}
                 subtitle="Core Values"
                 icon={<Shield className="w-8 h-8 text-white" />}
                 accentColor="#64c8ff"
@@ -541,7 +569,7 @@ const Home = () => {
             </motion.div>
             <motion.div variants={itemVariants}>
               <AICoachingCard 
-                title={t('about.vision.title') || "Our Vision"}
+                title={t('about.vision.title')}
                 subtitle="Future Goals"
                 icon={<Eye className="w-8 h-8 text-white" />}
                 accentColor="#64c8ff"
@@ -556,7 +584,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-6"
             >
               <Users className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Our Team</span>
+              <span className="text-sm font-medium text-primary">{t('ourTeam')}</span>
             </motion.div>
 
             <motion.h3
@@ -564,7 +592,7 @@ const Home = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                {t('ourTeam') || "Meet Our Experts"}
+                {t('about.team.title')}
               </span>
             </motion.h3>
 
@@ -572,7 +600,7 @@ const Home = () => {
               variants={itemVariants}
               className="text-gray-400 max-w-3xl mx-auto text-lg"
             >
-              Our experts bring together decades of experience in AI, machine learning, and business transformation
+              {t('about.team.subtitle')}
             </motion.p>
           </div>
 
@@ -608,7 +636,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full mb-6"
             >
               <Mail className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-accent">Get In Touch</span>
+              <span className="text-sm font-medium text-accent">{t('getInTouch')}</span>
             </motion.div>
 
             <motion.h2
@@ -616,7 +644,7 @@ const Home = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                {t('contactUs') || 'Start Your AI Journey'}
+                {t('startJourney')}
               </span>
             </motion.h2>
 
@@ -624,7 +652,7 @@ const Home = () => {
               variants={itemVariants}
               className="text-gray-400 max-w-3xl mx-auto text-lg"
             >
-              {t('contact.subtitle') || "Connect with our AI experts and discover how we can transform your business"}
+              {t('contact.subtitle')}
             </motion.p>
           </div>
 
@@ -644,18 +672,22 @@ const Home = () => {
                       </div>
                       <div>
                         <h3 className="text-2xl font-semibold mb-3">
-                          {t('scheduleConsultation') || "Free Consultation"}
+                          {t('scheduleConsultation')}
                         </h3>
                         <p className="text-gray-400 mb-4 leading-relaxed">
-                          Book a 30-minute consultation with our AI experts to discuss your business needs and opportunities.
+                          {t('contact.bookConsultation')}
                         </p>
                         <motion.div
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <Button size="md" className="flex items-center bg-gradient-to-r from-primary to-accent">
+                          <Button 
+                            onClick={() => scrollToSection('contact')}
+                            size="md" 
+                            className="flex items-center bg-gradient-to-r from-primary to-accent"
+                          >
                             <Clock className="w-4 h-4 mr-2" />
-                            Schedule Now
+                            {t('scheduleNow')}
                           </Button>
                         </motion.div>
                       </div>
@@ -735,7 +767,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-8"
             >
               <Rocket className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Ready to Transform?</span>
+              <span className="text-sm font-medium text-primary">{t('readyToTransform')}</span>
             </motion.div>
 
             <motion.h2
@@ -743,7 +775,7 @@ const Home = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-white via-primary to-accent bg-clip-text text-transparent">
-                Launch Your AI Transformation
+                {t('launchTransformation')}
               </span>
             </motion.h2>
 
@@ -751,7 +783,7 @@ const Home = () => {
               variants={itemVariants}
               className="text-gray-300 mb-10 text-xl leading-relaxed"
             >
-              Join hundreds of forward-thinking companies leveraging AI to drive innovation, efficiency, and exponential growth.
+              {t('joinCompanies')}
             </motion.p>
 
             <motion.div variants={itemVariants}>
@@ -760,6 +792,7 @@ const Home = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button 
+                  onClick={() => scrollToSection('contact')}
                   size="lg" 
                   className="px-12 py-5 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 relative overflow-hidden group"
                 >
@@ -771,7 +804,7 @@ const Home = () => {
                   />
                   <span className="relative z-10 flex items-center justify-center">
                     <User className="w-5 h-5 mr-3" />
-                    Schedule Free Consultation
+                    {t('scheduleFreeConsultation')}
                   </span>
                 </Button>
               </motion.div>
@@ -784,15 +817,15 @@ const Home = () => {
             >
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-primary" />
-                <span>Secure & Confidential</span>
+                <span>{t('secureConfidential')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-primary" />
-                <span>Quick Setup</span>
+                <span>{t('quickSetup')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-primary" />
-                <span>Proven Results</span>
+                <span>{t('provenResults')}</span>
               </div>
             </motion.div>
           </div>
@@ -864,7 +897,7 @@ const Home = () => {
                     onClick={() => setSelectedService(null)}
                   >
                     <Rocket className="w-4 h-4 mr-2" />
-                    Get Started
+                    {t('getStarted')}
                   </Button>
                 </motion.div>
                 <motion.div
@@ -876,7 +909,7 @@ const Home = () => {
                     className="border-gray-700 hover:border-primary"
                     onClick={() => setSelectedService(null)}
                   >
-                    Close
+                    {t('close')}
                   </Button>
                 </motion.div>
               </div>

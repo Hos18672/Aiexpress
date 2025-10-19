@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -12,6 +12,8 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeHash, setActiveHash] = useState('');
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const observer = useRef();
 
   // Track scroll position for navbar background
   useEffect(() => {
@@ -27,11 +29,70 @@ const Navbar = () => {
     setActiveHash(window.location.hash);
   }, [location]);
 
+  // Set up intersection observer to track active section
+  useEffect(() => {
+    // Add home to sections for explicit observation
+    const sections = ['home', 'why-choose-us', 'services', 'case-studies', 'about', 'contact'];
+    
+    const observerCallback = (entries) => {
+      // Find the section that is most visible in the viewport
+      let mostVisibleSection = '';
+      let highestVisibility = 0;
+      
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Calculate visibility percentage
+          const rect = entry.boundingClientRect;
+          const windowHeight = window.innerHeight;
+          
+          // Calculate how much of the element is visible in the viewport
+          const visibleTop = Math.max(0, -rect.top);
+          const visibleBottom = Math.min(rect.height, windowHeight - rect.top);
+          const visibleHeight = visibleBottom - visibleTop;
+          const visibilityPercentage = (visibleHeight / rect.height) * 100;
+          
+          // Update the most visible section if this one is more visible
+          if (visibilityPercentage > highestVisibility) {
+            highestVisibility = visibilityPercentage;
+            mostVisibleSection = entry.target.id;
+          }
+        }
+      });
+      
+      // Only update if we found a visible section
+      if (mostVisibleSection) {
+        setActiveSection(mostVisibleSection);
+      } else if (window.scrollY < 100) {
+        // Special case: if we're near the top, set home as active
+        setActiveSection('home');
+      }
+    };
+
+    observer.current = new IntersectionObserver(observerCallback, {
+      root: null,
+      rootMargin: '-25% 0px -75% 0px', // Adjusted margins for better detection
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    });
+
+    sections.forEach(section => {
+      const element = document.getElementById(section);
+      if (element) {
+        observer.current.observe(element);
+      }
+    });
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, []);
+
   const navItems = [
     { name: t('home'), path: '/' },
+    { name: t('whyChooseUs'), path: '/#why-choose-us' },
     { name: t('services'), path: '/#services' },
-    { name: "Case Studies", path: '/#case-studies' },
-    { name: "Why Choose Us", path: '/#why-choose-us' },
+    { name: t('caseStudies'), path: '/#case-studies' },
     { name: t('about'), path: '/#about' },
     { name: t('contact'), path: '/#contact' },
   ];
@@ -48,10 +109,17 @@ const Navbar = () => {
         behavior: 'smooth'
       });
       
-      // Update URL and active hash
+      // Update URL and active states
       const hash = '#' + sectionId;
       window.history.pushState(null, null, hash);
       setActiveHash(hash);
+      setActiveSection(sectionId);
+      
+      // Small delay to ensure the scroll completes before updating state
+      setTimeout(() => {
+        setActiveSection(sectionId);
+      }, 100);
+      
       return true;
     }
     return false;
@@ -71,6 +139,7 @@ const Navbar = () => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
           window.history.pushState(null, null, '/');
           setActiveHash('');
+          setActiveSection('home');
         }, 100);
       }
       return;
@@ -78,6 +147,9 @@ const Navbar = () => {
 
     if (path.startsWith('/#')) {
       const sectionId = path.substring(2);
+      
+      // Set the active section immediately when clicking
+      setActiveSection(sectionId);
       
       if (location.pathname === '/') {
         // Already on home page, just scroll after menu animation completes
@@ -87,6 +159,10 @@ const Navbar = () => {
       } else {
         // Navigate to home page first, then scroll
         navigate(`/#${sectionId}`);
+        // Set active section after navigation
+        setTimeout(() => {
+          setActiveSection(sectionId);
+        }, 300);
       }
     } else {
       // Regular navigation
@@ -108,15 +184,28 @@ const Navbar = () => {
   }, [location.pathname, location.hash]);
 
   const isNavItemActive = (itemPath) => {
+    // Special handling for home section
     if (itemPath === '/') {
-      return location.pathname === '/' && !activeHash;
+      // Home is active when:
+      // 1. We're at the root path with no hash, OR
+      // 2. We're at the root path and the active section is 'home', OR
+      // 3. We're at the root path and there's no active section (we're at the top)
+      return location.pathname === '/' && 
+        (!activeHash || activeHash === '' || activeSection === 'home' || activeSection === '');
     }
     
+    // Handle hash-based navigation items
     if (itemPath.startsWith('/#')) {
-      const hash = '#' + itemPath.substring(2);
-      return location.pathname === '/' && activeHash === hash;
+      const sectionId = itemPath.substring(2);
+      
+      // Item is active when:
+      // 1. We're on the home page, AND
+      // 2. Either the hash matches exactly OR the active section matches the section ID
+      return location.pathname === '/' && 
+        (activeHash === '#' + sectionId || activeSection === sectionId);
     }
     
+    // For regular paths, exact match
     return location.pathname === itemPath;
   };
 
@@ -225,6 +314,7 @@ const Navbar = () => {
             <LanguageSwitcher />
             
             <motion.button
+              onClick={() => handleScrollToSection('/#contact')}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -321,6 +411,7 @@ const Navbar = () => {
                 ))}
                 
                 <motion.button 
+                  onClick={() => handleScrollToSection('/#contact')}
                   variants={{
                     open: { y: 0, opacity: 1 },
                     closed: { y: 20, opacity: 0 }

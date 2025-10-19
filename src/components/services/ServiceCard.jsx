@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ServiceCard = ({ service, currentLanguage, onOpenDetails, icon }) => {
+  const { t } = useLanguage();
+  
   // Animation variants from JSON
   const cardVariants = {
     initial: { opacity: 0, y: 25, scale: 0.95 },
@@ -47,7 +50,7 @@ const ServiceCard = ({ service, currentLanguage, onOpenDetails, icon }) => {
           {service.description[currentLanguage] || service.description.en}
         </p>
         <Button variant="outline" className="mt-auto">
-          View Details
+          {t('viewDetails')}
         </Button>
       </Card>
     </motion.div>
