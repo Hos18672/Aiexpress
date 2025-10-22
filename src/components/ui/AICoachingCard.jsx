@@ -183,7 +183,7 @@ export default function AICoachingCard({
             </div>
           </div>
 
-          <h1 className="mb-2 sm:mb-3 text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide transition-all duration-500" style={{
+          <h1 className="mb-2 sm:mb-3 text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wide transition-all duration-500" style={{
             transform: isHovered ? 'scale(1.05)' : 'scale(1)',
           }}>
             {title}

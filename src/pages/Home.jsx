@@ -49,14 +49,14 @@ const Home = () => {
 
   const teamMembers = [
     {
-      name: "Alex Johnson",
-      role: "AI Director",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+      name: "Reza Hossaini",
+      role: "CTO & Gründer",
+      image: "https://muwgjsyjyyzzfmzpwrns.supabase.co/storage/v1/object/sign/photos/reza_3.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82Yzg3YzMxYS0yOTA0LTQ4OGMtYjczNC1kNWQyMTgxZGQ3MzAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwaG90b3MvcmV6YV8zLnBuZyIsImlhdCI6MTc2MTE1Nzc2NSwiZXhwIjoxNzkyNjkzNzY1fQ.vT9JW9j3XRRhU4-4nDpRa-h4QBGgI91sSMg5-efoj7Y"
     },
     {
-      name: "Maria Garcia",
-      role: "ML Engineer",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+      name: "Hikmatullah Razaghi",
+      role: "CTO & Gründer",
+      image: "https://muwgjsyjyyzzfmzpwrns.supabase.co/storage/v1/object/sign/photos/Hikmat.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82Yzg3YzMxYS0yOTA0LTQ4OGMtYjczNC1kNWQyMTgxZGQ3MzAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwaG90b3MvSGlrbWF0LnBuZyIsImlhdCI6MTc2MTE1NzE2NiwiZXhwIjoyMzkxODc3MTY2fQ.GP7XWz53K4IASC63_wA1_KOjr0eLujorkkyyneChErc"
     },
   ];
 
@@ -107,6 +107,7 @@ const Home = () => {
     }
   ];
 
+  // Move contactInfo inside the component to ensure access to the t function
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6 text-primary" />,
@@ -596,7 +597,13 @@ const Home = () => {
 
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+            className={`grid gap-8 ${
+              teamMembers.length === 1 
+                ? 'grid-cols-1' 
+                : teamMembers.length === 2 
+                  ? 'grid-cols-1 sm:grid-cols-2' 
+                  : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+            }`}
           >
             {teamMembers.map((member, index) => (
               <motion.div
@@ -634,7 +641,7 @@ const Home = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                {t('startJourney')}
+                {t('contact.title')}
               </span>
             </motion.h2>
 

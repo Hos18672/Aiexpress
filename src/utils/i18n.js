@@ -86,6 +86,10 @@ const enTranslations = {
     getInTouch: "Get In Touch",
     startJourney: "Start Your AI Journey",
     scheduleNow: "Schedule Now",
+    // Add missing contact keys
+    "contact.email": "Email",
+    "contact.phone": "Phone",
+    "contact.address": "Address",
     
     // Contact with nested structure
     "contact.title": "Contact Us",
@@ -227,6 +231,10 @@ const deTranslations = {
     getInTouch: "Kontakt aufnehmen",
     startJourney: "Beginnen Sie Ihre KI-Reise",
     scheduleNow: "Jetzt vereinbaren",
+    // Add missing contact keys
+    "contact.email": "E-Mail",
+    "contact.phone": "Telefon",
+    "contact.address": "Adresse",
     
     // Contact with nested structure
     "contact.title": "Kontaktieren Sie uns",
