@@ -360,24 +360,30 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AICoachingCard 
-              title={t('whyChooseUs.items.0.title') || "AI Coaching"}
-              subtitle={t('whyChooseUs.items.0.description') || "Personalized coaching to help your team master AI technologies"}
-              icon={<Bot className="w-8 h-8 text-white" />}
-              accentColor="#64c8ff"
-            />
-            <AICoachingCard 
-              title={t('whyChooseUs.items.1.title') || "Workshops"}
-              subtitle={t('whyChooseUs.items.1.description') || "Interactive sessions to upskill your entire team"}
-              icon={<Users className="w-8 h-8 text-white" />}
-              accentColor="#64c8ff"
-            />
-            <AICoachingCard 
-              title={t('whyChooseUs.items.2.title') || "Automation"}
-              subtitle={t('whyChooseUs.items.2.description') || "Streamline operations by automating repetitive tasks"}
-              icon={<Settings className="w-8 h-8 text-white" />}
-              accentColor="#64c8ff"
-            />
+            <div className="flex">
+              <AICoachingCard 
+                title={t('whyChooseUs.items.0.title') || "AI Coaching"}
+                subtitle={t('whyChooseUs.items.0.description') || "Personalized coaching to help your team master AI technologies"}
+                icon={<Bot className="w-8 h-8 text-white" />}
+                accentColor="#64c8ff"
+              />
+            </div>
+            <div className="flex">
+              <AICoachingCard 
+                title={t('whyChooseUs.items.1.title') || "Workshops"}
+                subtitle={t('whyChooseUs.items.1.description') || "Interactive sessions to upskill your entire team"}
+                icon={<Users className="w-8 h-8 text-white" />}
+                accentColor="#64c8ff"
+              />
+            </div>
+            <div className="flex">
+              <AICoachingCard 
+                title={t('whyChooseUs.items.2.title') || "Automation"}
+                subtitle={t('whyChooseUs.items.2.description') || "Streamline operations by automating repetitive tasks"}
+                icon={<Settings className="w-8 h-8 text-white" />}
+                accentColor="#64c8ff"
+              />
+            </div>
           </div>
         </motion.div>
       </SectionWrapper>

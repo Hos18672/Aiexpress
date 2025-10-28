@@ -117,9 +117,9 @@ export default function AICoachingCard({
   return (
     <div className="flex items-center justify-center p-3 sm:p-4 md:p-5 h-full">
       <div 
-        className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden rounded-xl sm:rounded-2xl border border-blue-500/25 bg-transparent p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-500 hover:border-blue-400/40 hover:shadow-[0_0_40px_rgba(79,156,255,0.3)]"
+        className="relative w-full h-full overflow-hidden rounded-xl sm:rounded-2xl border border-blue-500/25 bg-transparent p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-500 hover:border-blue-400/40 hover:shadow-[0_0_40px_rgba(79,156,255,0.3)] flex flex-col"
         style={{ 
-          aspectRatio: '16/9',
+          minHeight: '300px',
           transform: isHovered ? 'translateY(-8px) scale(1.02)' : 'translateY(0) scale(1)',
           transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
         }}
@@ -166,42 +166,40 @@ export default function AICoachingCard({
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 via-transparent to-transparent pointer-events-none" />
 
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
-          <div 
-            className="mb-6 sm:mb-8 flex h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 items-center justify-center rounded-full text-4xl sm:text-5xl md:text-6xl text-white shadow-xl transition-all duration-500 hover:scale-110"
-            style={{
-              boxShadow: isHovered 
-                ? `0 0 40px rgba(79,156,255,0.8), 0 0 80px rgba(79,156,255,0.4)` 
-                : `0 0 20px rgba(79,156,255,0.4)`,
-              animation: isHovered 
-                ? 'pulse-intense 1.5s ease-in-out infinite' 
-                : 'pulse 3s ease-in-out infinite'
-            }}
-          >
-            <div className="flex items-center justify-center">
-              {icon}
+        <div className="relative z-10 flex flex-col h-full">
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <div 
+              className="flex h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 items-center justify-center rounded-full text-4xl sm:text-5xl md:text-6xl text-white shadow-xl transition-all duration-500 hover:scale-110"
+            >
+              <div className="flex items-center justify-center">
+                {icon}
+              </div>
             </div>
           </div>
 
-          <h1 className="mb-2 sm:mb-3 text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wide transition-all duration-500" style={{
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-          }}>
-            {title}
-          </h1>
+          <div className="flex-grow flex flex-col justify-center">
+            <h1 className="mb-3 sm:mb-4 text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wide transition-all duration-500 text-center" style={{
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            }}>
+              {title}
+            </h1>
 
-          <p className="mb-4 text-xs sm:text-sm md:text-base font-medium tracking-widest text-cyan-300 uppercase transition-all duration-500" style={{
-            opacity: isHovered ? 1 : 0.8,
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-          }}>
-            {subtitle}
-          </p>
+            <p className="mb-4 text-xs sm:text-sm md:text-base font-light tracking-widest text-cyan-300 uppercase transition-all duration-500 text-center leading-relaxed" style={{
+              opacity: isHovered ? 1 : 0.8,
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            }}>
+              {subtitle}
+            </p>
+          </div>
 
-          <div 
-            className="h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-500"
-            style={{
-              width: isHovered ? '60px' : '40px',
-            }}
-          />
+          <div className="flex justify-center mt-auto">
+            <div 
+              className="h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-500"
+              style={{
+                width: isHovered ? '60px' : '40px',
+              }}
+            />
+          </div>
         </div>
 
         <style>{`

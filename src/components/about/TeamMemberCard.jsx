@@ -85,24 +85,8 @@ const TeamMemberCard = ({ member, index }) => {
             className="w-28 h-28 rounded-full mx-auto mb-6 overflow-hidden relative"
             variants={borderVariants}
           >
-            {/* Rotating border effect */}
-            <motion.div
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-75"
-              animate={{
-                rotate: [0, 360]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                padding: '2px',
-                background: 'linear-gradient(45deg, rgba(79,156,255,0.8), rgba(100,200,255,0.8), rgba(79,156,255,0.8))',
-                backgroundSize: '200% 200%'
-              }}
-            />
-            <div className="absolute inset-0.5 rounded-full bg-gray-900 z-10" />
+            {/* Static border instead of rotating animation */}
+            <div className="absolute inset-0 rounded-full border-2 border-primary/50" />
             <motion.img 
               src={member.image} 
               alt={member.name} 

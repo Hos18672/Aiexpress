@@ -10,10 +10,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeHash, setActiveHash] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const observer = useRef();
+  const isScrollingRef = useRef(false);
 
   // Track scroll position for navbar background
   useEffect(() => {
@@ -23,11 +23,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Update active hash when location changes
-  useEffect(() => {
-    setActiveHash(window.location.hash);
-  }, [location]);
 
   // Set up intersection observer to track active section
   useEffect(() => {
@@ -89,12 +84,12 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: t('home'), path: '/' },
-    { name: t('whyChooseUs'), path: '/#why-choose-us' },
-    { name: t('services'), path: '/#services' },
-    { name: t('caseStudies'), path: '/#case-studies' },
-    { name: t('about'), path: '/#about' },
-    { name: t('contact'), path: '/#contact' },
+    { name: t('home'), path: '/', section: 'home' },
+    { name: t('whyChooseUs'), path: '/#why-choose-us', section: 'why-choose-us' },
+    { name: t('services'), path: '/#services', section: 'services' },
+    { name: t('caseStudies'), path: '/#case-studies', section: 'case-studies' },
+    { name: t('about'), path: '/#about', section: 'about' },
+    { name: t('contact'), path: '/#contact', section: 'contact' },
   ];
 
   const scrollToSection = (sectionId) => {
@@ -104,21 +99,23 @@ const Navbar = () => {
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
       
+      isScrollingRef.current = true;
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
       
-      // Update URL hash but don't immediately update active states
-      const hash = '#' + sectionId;
-      window.history.pushState(null, null, hash);
+      // Reset scrolling flag after scroll completes
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 1000);
       
       return true;
     }
     return false;
   };
 
-  const handleScrollToSection = (path) => {
+  const handleScrollToSection = (path, section) => {
     // Close mobile menu immediately for better UX
     setMobileMenuOpen(false);
 
@@ -131,26 +128,24 @@ const Navbar = () => {
         setTimeout(() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
           window.history.pushState(null, null, '/');
-          setActiveHash('');
+          setActiveSection('home');
         }, 100);
       }
       return;
     }
 
     if (path.startsWith('/#')) {
-      const sectionId = path.substring(2);
-      
-      // Set the active hash immediately to prevent other items from becoming active
-      setActiveHash('#' + sectionId);
+      // Set the active section immediately to prevent other items from becoming active
+      setActiveSection(section);
       
       if (location.pathname === '/') {
         // Already on home page, just scroll after menu animation completes
         setTimeout(() => {
-          scrollToSection(sectionId);
+          scrollToSection(section);
         }, 100);
       } else {
         // Navigate to home page first, then scroll
-        navigate(`/#${sectionId}`);
+        navigate(`/#${section}`);
       }
     } else {
       // Regular navigation
@@ -164,6 +159,7 @@ const Navbar = () => {
       // Use setTimeout to ensure DOM is ready
       const timer = setTimeout(() => {
         const sectionId = location.hash.substring(1);
+        setActiveSection(sectionId);
         scrollToSection(sectionId);
       }, 300);
       
@@ -171,30 +167,22 @@ const Navbar = () => {
     }
   }, [location.pathname, location.hash]);
 
-  const isNavItemActive = (itemPath) => {
-    // Special handling for home section
-    if (itemPath === '/') {
-      // Home is active when:
-      // 1. We're at the root path with no hash, OR
-      // 2. We're at the root path and the active section is 'home', OR
-      // 3. We're at the root path and there's no active section (we're at the top)
-      return location.pathname === '/' && 
-        (!activeHash || activeHash === '' || activeSection === 'home' || activeSection === '');
+  const isNavItemActive = (item) => {
+    // For home section, special handling
+    if (item.path === '/') {
+      return location.pathname === '/' && (activeSection === 'home' || activeSection === '');
     }
     
-    // Handle hash-based navigation items
-    if (itemPath.startsWith('/#')) {
-      const sectionId = itemPath.substring(2);
-      
+    // For hash-based navigation items
+    if (item.path.startsWith('/#')) {
       // Item is active when:
       // 1. We're on the home page, AND
-      // 2. Either the hash matches exactly OR the active section matches the section ID
-      return location.pathname === '/' && 
-        (activeHash === '#' + sectionId || activeSection === sectionId);
+      // 2. The active section matches the item's section
+      return location.pathname === '/' && activeSection === item.section;
     }
     
     // For regular paths, exact match
-    return location.pathname === itemPath;
+    return location.pathname === item.path;
   };
 
   return (
@@ -224,7 +212,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex items-center space-x-3 cursor-pointer"
-            onClick={() => handleScrollToSection('/')}
+            onClick={() => handleScrollToSection('/', 'home')}
           >
             <motion.div 
               className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/30"
@@ -262,9 +250,9 @@ const Navbar = () => {
                 transition={{ duration: 0.5, delay: 0.1 * index }}
               >
                 <motion.button
-                  onClick={() => handleScrollToSection(item.path)}
+                  onClick={() => handleScrollToSection(item.path, item.section)}
                   className={`relative px-4 py-2 rounded-lg transition-all duration-300 ${
-                    isNavItemActive(item.path)
+                    isNavItemActive(item)
                       ? 'text-white'
                       : 'text-gray-300 hover:text-white'
                   }`}
@@ -273,14 +261,14 @@ const Navbar = () => {
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   <span className="relative z-10">{item.name}</span>
-                  {isNavItemActive(item.path) && (
+                  {isNavItemActive(item) && (
                     <motion.div 
                       className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg"
                       layoutId="navbarIndicator"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
-                  {isNavItemActive(item.path) && (
+                  {isNavItemActive(item) && (
                     <motion.div 
                       className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent"
                       layoutId="navbarUnderline"
@@ -302,7 +290,7 @@ const Navbar = () => {
             <LanguageSwitcher />
             
             <motion.button
-              onClick={() => handleScrollToSection('/#contact')}
+              onClick={() => handleScrollToSection('/#contact', 'contact')}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -386,9 +374,9 @@ const Navbar = () => {
                     }}
                   >
                     <button
-                      onClick={() => handleScrollToSection(item.path)}
+                      onClick={() => handleScrollToSection(item.path, item.section)}
                       className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 ${
-                        isNavItemActive(item.path)
+                        isNavItemActive(item)
                           ? 'bg-gradient-to-r from-primary/20 to-accent/20 text-white border border-primary/30'
                           : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
                       }`}
@@ -399,7 +387,7 @@ const Navbar = () => {
                 ))}
                 
                 <motion.button 
-                  onClick={() => handleScrollToSection('/#contact')}
+                  onClick={() => handleScrollToSection('/#contact', 'contact')}
                   variants={{
                     open: { y: 0, opacity: 1 },
                     closed: { y: 20, opacity: 0 }
