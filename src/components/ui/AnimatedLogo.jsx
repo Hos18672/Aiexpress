@@ -55,45 +55,14 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
     }
   });
 
-  // Pulsing core
+  // Pulsing core - updated without shadow animation
   const coreVariants = {
     animate: {
-      scale: [1, 1.3, 1],
-      boxShadow: [
-        "0 0 20px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(59, 130, 246, 0.2)",
-        "0 0 60px rgba(34, 211, 238, 0.8), inset 0 0 40px rgba(34, 211, 238, 0.4)",
-        "0 0 20px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(59, 130, 246, 0.2)"
-      ],
+      scale: [1, 1.15, 1],
       transition: {
         duration: 3,
         repeat: Infinity,
         ease: "easeInOut"
-      }
-    }
-  };
-
-  // Spiral waves
-  const waveVariants = (i) => ({
-    animate: {
-      pathLength: [0, 1],
-      opacity: [0, 0.8, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        delay: i * 0.6,
-        ease: "easeInOut"
-      }
-    }
-  });
-
-  // DNA-like helix rotation
-  const helixVariants = {
-    animate: {
-      rotateX: [0, 360],
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "linear"
       }
     }
   };
@@ -160,7 +129,7 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
           return (
             <motion.div
               key={`outer-particle-${i}`}
-              className="absolute w-3 h-3 bg-gradient-to-br from-cyan-300 to-blue-400 rounded-full"
+              className="absolute w-3 h-3 bg-gradient-to-br from-cyan-300 to-blue-400 rounded-full shadow-lg shadow-cyan-400/40"
               style={{
                 top: `${y}%`,
                 left: `${x}%`,
@@ -188,7 +157,7 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
           return (
             <motion.div
               key={`middle-particle-${i}`}
-              className="absolute w-2.5 h-2.5 bg-gradient-to-br from-blue-300 to-cyan-300 rounded-full"
+              className="absolute w-2.5 h-2.5 bg-gradient-to-br from-blue-300 to-cyan-300 rounded-full shadow-md shadow-cyan-300/50"
               style={{
                 top: `${y}%`,
                 left: `${x}%`,
@@ -196,12 +165,7 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
               }}
               animate={{
                 scale: [1, 1.8, 1],
-                opacity: [0.5, 1, 0.5],
-                boxShadow: [
-                  "0 0 10px rgba(34, 211, 238, 0.5)",
-                  "0 0 20px rgba(34, 211, 238, 1)",
-                  "0 0 10px rgba(34, 211, 238, 0.5)"
-                ]
+                opacity: [0.5, 1, 0.5]
               }}
               transition={{
                 duration: 2.5,
@@ -227,7 +191,7 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
           return (
             <motion.div
               key={`inner-node-${i}`}
-              className="absolute w-2 h-2 bg-cyan-200 rounded-full"
+              className="absolute w-2 h-2 bg-cyan-200 rounded-full shadow-sm shadow-cyan-200/60"
               style={{
                 top: `${y}%`,
                 left: `${x}%`,
@@ -235,12 +199,7 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
               }}
               animate={{
                 scale: [1, 2, 1],
-                opacity: [0.3, 1, 0.3],
-                boxShadow: [
-                  "0 0 8px rgba(165, 243, 252, 0.4)",
-                  "0 0 15px rgba(165, 243, 252, 1)",
-                  "0 0 8px rgba(165, 243, 252, 0.4)"
-                ]
+                opacity: [0.3, 1, 0.3]
               }}
               transition={{
                 duration: 2,
@@ -268,9 +227,9 @@ const AnimatedLogo = ({ size = 'md', className = '' }) => {
         />
       ))}
 
-      {/* Core with intense glow */}
+      {/* Core with glow - updated shadow */}
       <motion.div
-        className="absolute w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full overflow-hidden"
+        className="absolute w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full overflow-hidden shadow-2xl shadow-cyan-500/30"
         variants={coreVariants}
         animate="animate"
       >
