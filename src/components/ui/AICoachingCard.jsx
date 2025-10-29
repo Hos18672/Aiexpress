@@ -14,8 +14,11 @@ export default function AICoachingCard({
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMouseNear, setIsMouseNear] = useState(false);
+  const [borderOpacity, setBorderOpacity] = useState(0);
   const targetPosRef = useRef(0);
   const currentPosRef = useRef(0);
+  const targetOpacityRef = useRef(0);
+  const currentOpacityRef = useRef(0);
 
   // Track global mouse position for detecting nearby mouse
   useEffect(() => {
@@ -172,11 +175,19 @@ export default function AICoachingCard({
       // Draw static border background
       ctx.beginPath();
       ctx.roundRect(padding, padding, w, h, borderRadius);
-      ctx.strokeStyle = isMouseNear || isHovered ? 'rgba(100, 200, 255, 0.1)' : 'rgba(100, 200, 255, 0.1)';
+      ctx.strokeStyle = 'rgba(100, 200, 255, 0.1)';
       ctx.lineWidth = 2;
       ctx.stroke();
       
-      if (!isMouseNear && !isHovered) {
+      // Update target opacity based on hover/mouse near state
+      targetOpacityRef.current = (isMouseNear || isHovered) ? 1 : 0;
+      
+      // Smooth opacity transition
+      currentOpacityRef.current += (targetOpacityRef.current - currentOpacityRef.current) * 0.1;
+      setBorderOpacity(currentOpacityRef.current);
+      
+      // Only draw animated border if opacity is significant
+      if (currentOpacityRef.current < 0.01) {
         borderAnimationRef.current = requestAnimationFrame(drawBorder);
         return;
       }
@@ -284,7 +295,7 @@ export default function AICoachingCard({
       
       const gradientLength = perimeter * 0.35;
       
-      // Draw the gradient line
+      // Draw the gradient line with smooth opacity
       const segments = 100;
       for (let i = 0; i < segments; i++) {
         const segProgress = i / segments;
@@ -308,7 +319,8 @@ export default function AICoachingCard({
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         
-        ctx.strokeStyle = `hsla(200, 100%, 70%, ${alpha})`;
+        // Apply smooth fade in/out opacity
+        ctx.strokeStyle = `hsla(200, 100%, 70%, ${alpha * currentOpacityRef.current})`;
         ctx.lineWidth = 4;
         ctx.lineCap = 'round';
         ctx.stroke();
