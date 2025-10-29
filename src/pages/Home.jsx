@@ -276,25 +276,6 @@ const Home = () => {
                 </Button>
               </motion.div>
             </div>
-
-            {/* Stats */}
-            <motion.div 
-              variants={itemVariants}
-              className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-800"
-            >
-              {[
-                { value: '200+', label: t('clients') },
-                { value: '98%', label: t('successRate') },
-                { value: '24/7', label: t('support') }
-              ].map((stat, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-400 mt-1">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
           
           <motion.div 
@@ -718,15 +699,6 @@ const Home = () => {
           </div>
         </motion.div>
       </SectionWrapper>
-
-      {/* Testimonials Section */}
-      {/* <Testimonials /> */}
-
-      {/* Newsletter Section */}
-      {/* <SectionWrapper>
-        <Newsletter />
-      </SectionWrapper> */}
-
       {/* CTA Section */}
       <SectionWrapper id="cta" className="relative">
         <motion.div

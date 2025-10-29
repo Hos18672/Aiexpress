@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 
 export default function AICoachingCard({
   title = "AI Coaching",
@@ -8,10 +7,49 @@ export default function AICoachingCard({
   accentColor = "#64c8ff"
 }) {
   const canvasRef = useRef(null);
+  const borderCanvasRef = useRef(null);
   const shapesRef = useRef([]);
   const animationRef = useRef(null);
+  const borderAnimationRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMouseNear, setIsMouseNear] = useState(false);
+  const targetPosRef = useRef(0);
+  const currentPosRef = useRef(0);
 
+  // Track global mouse position for detecting nearby mouse
+  useEffect(() => {
+    const handleGlobalMouseMove = (e) => {
+      const card = borderCanvasRef.current?.parentElement;
+      if (!card) return;
+      
+      const rect = card.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      // Calculate distance from mouse to card edges
+      const distanceX = Math.max(rect.left - mouseX, mouseX - rect.right, 0);
+      const distanceY = Math.max(rect.top - mouseY, mouseY - rect.bottom, 0);
+      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+      
+      // Show border when mouse is within 150px of card
+      if (distance < 150) {
+        setIsMouseNear(true);
+        // Calculate relative position even when outside
+        setMousePos({
+          x: mouseX - rect.left,
+          y: mouseY - rect.top
+        });
+      } else {
+        setIsMouseNear(false);
+      }
+    };
+    
+    window.addEventListener('mousemove', handleGlobalMouseMove);
+    return () => window.removeEventListener('mousemove', handleGlobalMouseMove);
+  }, []);
+
+  // Background particle animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -31,7 +69,6 @@ export default function AICoachingCard({
       const h = canvas.height + 200;
       const lineCount = 10 + Math.floor(Math.random() * 10);
 
-      // Generate random lines
       for (let i = 0; i < lineCount; i++) {
         const x1 = Math.random() * w;
         const y1 = Math.random() * h;
@@ -59,7 +96,6 @@ export default function AICoachingCard({
       const opacityPulse = Math.sin(time * shape.pulseSpeed + shape.phase) * 0.3 + 0.7;
       const opacity = shape.baseOpacity * opacityPulse;
 
-      // Rotate the line around its center
       const rotation = time * shape.rotationSpeed;
       
       const dx1 = shape.x1 - shape.centerX;
@@ -75,12 +111,10 @@ export default function AICoachingCard({
       const rotatedX2 = dx2 * cos - dy2 * sin + shape.centerX;
       const rotatedY2 = dx2 * sin + dy2 * cos + shape.centerY;
 
-      // Draw the line
       ctx.beginPath();
       ctx.moveTo(rotatedX1, rotatedY1);
       ctx.lineTo(rotatedX2, rotatedY2);
       
-      // Create gradient along the line
       const gradient = ctx.createLinearGradient(rotatedX1, rotatedY1, rotatedX2, rotatedY2);
       gradient.addColorStop(0, `rgba(100, 200, 255, ${opacity * 0.3})`);
       gradient.addColorStop(0.5, `rgba(100, 200, 255, ${opacity})`);
@@ -93,10 +127,7 @@ export default function AICoachingCard({
 
     const animate = (time) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Draw all lines
       shapesRef.current.forEach(shape => drawShape(shape, time));
-      
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -114,120 +145,328 @@ export default function AICoachingCard({
     };
   }, []);
 
+  // Animated border effect
+  useEffect(() => {
+    const canvas = borderCanvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const card = canvas.parentElement;
+
+    const resizeCanvas = () => {
+      const padding = 40;
+      canvas.width = card.offsetWidth + padding * 2;
+      canvas.height = card.offsetHeight + padding * 2;
+      canvas.style.left = `-${padding}px`;
+      canvas.style.top = `-${padding}px`;
+    };
+
+    const drawBorder = () => {
+      const padding = 40;
+      const w = canvas.width - padding * 2;
+      const h = canvas.height - padding * 2;
+      const borderRadius = 16;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw static border background
+      ctx.beginPath();
+      ctx.roundRect(padding, padding, w, h, borderRadius);
+      ctx.strokeStyle = isMouseNear || isHovered ? 'rgba(100, 200, 255, 0.1)' : 'rgba(100, 200, 255, 0.1)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      if (!isMouseNear && !isHovered) {
+        borderAnimationRef.current = requestAnimationFrame(drawBorder);
+        return;
+      }
+      
+      // Calculate perimeter
+      const perimeter = 2 * (w + h) - 8 * borderRadius + 2 * Math.PI * borderRadius;
+      
+      // Helper function to get point on rounded rectangle border
+      const getPointOnBorder = (dist) => {
+        const r = borderRadius;
+        let d = dist;
+        
+        // Normalize to perimeter range
+        d = ((d % perimeter) + perimeter) % perimeter;
+        
+        // Top edge
+        if (d < w - 2 * r) {
+          return { x: r + d + padding, y: padding };
+        }
+        d -= (w - 2 * r);
+        
+        // Top-right corner
+        if (d < Math.PI * r / 2) {
+          const angle = -Math.PI / 2 + d / r;
+          return { x: w - r + r * Math.cos(angle) + padding, y: r + r * Math.sin(angle) + padding };
+        }
+        d -= Math.PI * r / 2;
+        
+        // Right edge
+        if (d < h - 2 * r) {
+          return { x: w + padding, y: r + d + padding };
+        }
+        d -= (h - 2 * r);
+        
+        // Bottom-right corner
+        if (d < Math.PI * r / 2) {
+          const angle = d / r;
+          return { x: w - r + r * Math.cos(angle) + padding, y: h - r + r * Math.sin(angle) + padding };
+        }
+        d -= Math.PI * r / 2;
+        
+        // Bottom edge
+        if (d < w - 2 * r) {
+          return { x: w - r - d + padding, y: h + padding };
+        }
+        d -= (w - 2 * r);
+        
+        // Bottom-left corner
+        if (d < Math.PI * r / 2) {
+          const angle = Math.PI / 2 + d / r;
+          return { x: r + r * Math.cos(angle) + padding, y: h - r + r * Math.sin(angle) + padding };
+        }
+        d -= Math.PI * r / 2;
+        
+        // Left edge
+        if (d < h - 2 * r) {
+          return { x: padding, y: h - r - d + padding };
+        }
+        d -= (h - 2 * r);
+        
+        // Top-left corner
+        const angle = Math.PI + d / r;
+        return { x: r + r * Math.cos(angle) + padding, y: r + r * Math.sin(angle) + padding };
+      };
+      
+      // Find closest point on border to mouse
+      const findClosestPointOnBorder = () => {
+        let minDist = Infinity;
+        let closestDist = 0;
+        const samples = 300;
+        
+        for (let i = 0; i < samples; i++) {
+          const dist = (i / samples) * perimeter;
+          const p = getPointOnBorder(dist);
+          const dx = p.x - (mousePos.x + padding);
+          const dy = p.y - (mousePos.y + padding);
+          const d = Math.sqrt(dx * dx + dy * dy);
+          
+          if (d < minDist) {
+            minDist = d;
+            closestDist = dist;
+          }
+        }
+        
+        return closestDist;
+      };
+      
+      // Smooth interpolation
+      targetPosRef.current = findClosestPointOnBorder();
+      
+      // Handle wraparound for smooth animation
+      let diff = targetPosRef.current - currentPosRef.current;
+      if (Math.abs(diff) > perimeter / 2) {
+        if (diff > 0) {
+          diff -= perimeter;
+        } else {
+          diff += perimeter;
+        }
+      }
+      
+      currentPosRef.current += diff * 0.15;
+      
+      // Keep currentPos within bounds using proper modulo
+      currentPosRef.current = ((currentPosRef.current % perimeter) + perimeter) % perimeter;
+      
+      const gradientLength = perimeter * 0.35;
+      
+      // Draw the gradient line
+      const segments = 100;
+      for (let i = 0; i < segments; i++) {
+        const segProgress = i / segments;
+        const dist = currentPosRef.current - gradientLength / 2 + segProgress * gradientLength;
+        const nextDist = currentPosRef.current - gradientLength / 2 + (i + 1) / segments * gradientLength;
+        
+        const p1 = getPointOnBorder(dist);
+        const p2 = getPointOnBorder(nextDist);
+        
+        // Calculate opacity based on position in gradient
+        let alpha = 0;
+        if (segProgress < 0.2) {
+          alpha = segProgress / 0.2;
+        } else if (segProgress > 0.8) {
+          alpha = (1 - segProgress) / 0.2;
+        } else {
+          alpha = 1;
+        }
+        
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        
+        ctx.strokeStyle = `hsla(200, 100%, 70%, ${alpha})`;
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+      
+      borderAnimationRef.current = requestAnimationFrame(drawBorder);
+    };
+
+    resizeCanvas();
+    borderAnimationRef.current = requestAnimationFrame(drawBorder);
+
+    const handleResize = () => resizeCanvas();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (borderAnimationRef.current) {
+        cancelAnimationFrame(borderAnimationRef.current);
+      }
+    };
+  }, [isHovered, isMouseNear, mousePos]);
+
   return (
-    <div className="flex items-center justify-center p-3 sm:p-4 md:p-5 h-full">
       <div 
-        className="relative w-full h-full overflow-hidden rounded-xl sm:rounded-2xl border border-blue-500/25 bg-transparent p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-500 hover:border-blue-400/40 hover:shadow-[0_0_40px_rgba(79,156,255,0.3)] flex flex-col"
+        className="relative w-full h-full overflow-hidden rounded-2xl bg-slate-800/10 backdrop-blur-xl p-8 sm:p-10 md:p-12 shadow-2xl transition-all duration-500 flex flex-col"
         style={{ 
           minHeight: '300px',
-          transform: isHovered ? 'translateY(-8px) scale(1.02)' : 'translateY(0) scale(1)',
-          transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
+          transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+          boxShadow: isHovered 
+            ? '0 30px 60px -12px rgba(100, 200, 255, 0.1), 0 0 100px rgba(100, 200, 255, 0.2)' 
+            : '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
         }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => {
+          setIsHovered(true);
+          setIsMouseNear(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          setIsMouseNear(false);
+        }}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          setMousePos({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+          });
+          
+          // Check if mouse is near the card (within 100px)
+          const distanceFromEdge = Math.min(
+            e.clientX - rect.left,
+            e.clientY - rect.top,
+            rect.right - e.clientX,
+            rect.bottom - e.clientY
+          );
+          setIsMouseNear(distanceFromEdge < 100 || true);
+        }}
       >
-        {/* Animated border - only on hover - single continuous line */}
-        {isHovered && (
-          <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl">
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="movingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="rgba(100, 200, 255, 0)" />
-                  <stop offset="30%" stopColor="rgba(100, 200, 255, 0)" />
-                  <stop offset="50%" stopColor="rgba(100, 200, 255, 1)" />
-                  <stop offset="70%" stopColor="rgba(100, 200, 255, 0)" />
-                  <stop offset="100%" stopColor="rgba(100, 200, 255, 0)" />
-                </linearGradient>
-              </defs>
-              <motion.path
-                d="M 2,2 L 98,2 L 98,98 L 2,98 Z"
-                fill="none"
-                stroke="url(#movingGradient)"
-                strokeWidth="0.5"
-                strokeLinecap="round"
-                strokeDasharray="40 360"
-                initial={{ strokeDashoffset: 0 }}
-                animate={{ strokeDashoffset: -400 }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              />
-            </svg>
-          </div>
-        )}
+        {/* Animated border canvas */}
+        <canvas
+          ref={borderCanvasRef}
+          className="absolute pointer-events-none"
+          style={{ zIndex: 20 }}
+        />
 
+        {/* Background particle canvas */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full"
+          style={{ zIndex: 1 }}
         />
 
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 via-transparent to-transparent pointer-events-none" />
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" style={{ zIndex: 2 }} />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" style={{ zIndex: 3 }} />
 
+        {/* Content */}
         <div className="relative z-10 flex flex-col h-full">
-          <div className="flex justify-center mb-4 sm:mb-6">
-            <div 
-              className="flex h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 items-center justify-center rounded-full text-4xl sm:text-5xl md:text-6xl text-white shadow-xl transition-all duration-500 hover:scale-110"
-            >
-              <div className="flex items-center justify-center">
-                {icon}
-              </div>
-            </div>
-          </div>
 
-          <div className="flex-grow flex flex-col justify-center">
-            <h1 className="mb-3 sm:mb-4 text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wide transition-all duration-500 text-center" style={{
-              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-            }}>
+          {/* Title and subtitle */}
+          <div className="flex-grow flex flex-col justify-center space-y-4">
+            <h1 
+              className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 tracking-wide text-center transition-all duration-500"
+              style={{
+                transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+                backgroundSize: isHovered ? '200% 100%' : '100% 100%',
+                animation: isHovered ? 'shimmer 2s linear infinite' : 'none'
+              }}
+            >
               {title}
             </h1>
 
-            <p className="mb-4 text-xs sm:text-sm md:text-base font-light tracking-widest text-cyan-300 uppercase transition-all duration-500 text-center leading-relaxed" style={{
-              opacity: isHovered ? 1 : 0.8,
-              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-            }}>
+            <p 
+              className="text-sm md:text-base font-light tracking-[0.3em] text-cyan-300/80 uppercase text-center leading-relaxed transition-all duration-500"
+              style={{
+                opacity: isHovered ? 1 : 0.7,
+                transform: isHovered ? 'scale(1.05) translateY(-2px)' : 'scale(1) translateY(0)',
+                textShadow: isHovered ? '0 0 20px rgba(100, 200, 255, 0.6)' : 'none'
+              }}
+            >
               {subtitle}
             </p>
           </div>
 
-          <div className="flex justify-center mt-auto">
+          {/* Bottom accent line */}
+          <div className="flex justify-center mt-8">
             <div 
-              className="h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-500"
+              className="h-1 rounded-full bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-700"
               style={{
-                width: isHovered ? '60px' : '40px',
+                width: isHovered ? '120px' : '60px',
+                boxShadow: isHovered ? '0 0 20px rgba(100, 200, 255, 0.8)' : 'none'
               }}
             />
           </div>
+
+          {/* Data stream effect on hover */}
+          {isHovered && (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 5 }}>
+              {[...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-40"
+                  style={{
+                    top: `${15 + i * 15}%`,
+                    left: '-100%',
+                    width: '100%',
+                    animation: `dataStream ${1.5 + i * 0.3}s ease-in-out infinite`,
+                    animationDelay: `${i * 0.2}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <style>{`
-          @keyframes pulse {
-            0%, 100% {
-              box-shadow: 0 0 20px rgba(79,156,255, 0.4);
+          @keyframes shimmer {
+            0% {
+              background-position: -200% center;
             }
-            50% {
-              box-shadow: 0 0 40px rgba(79,156,255, 0.8);
-            }
-          }
-
-          @keyframes pulse-intense {
-            0%, 100% {
-              box-shadow: 0 0 40px rgba(79,156,255, 0.8), 0 0 80px rgba(79,156,255, 0.4);
-            }
-            50% {
-              box-shadow: 0 0 60px rgba(79,156,255, 1), 0 0 120px rgba(79,156,255, 0.6);
+            100% {
+              background-position: 200% center;
             }
           }
 
-          @media (max-width: 640px) {
-            .card-responsive {
-              padding: 1rem;
+          @keyframes dataStream {
+            0% {
+              left: -100%;
+              opacity: 0;
+            }
+            50% {
+              opacity: 0.4;
+            }
+            100% {
+              left: 100%;
+              opacity: 0;
             }
           }
         `}</style>
       </div>
-    </div>
   );
 }

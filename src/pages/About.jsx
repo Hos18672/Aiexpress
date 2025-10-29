@@ -227,79 +227,115 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div variants={itemVariants}>
-              <Card className="p-10 h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-primary/20 relative overflow-hidden group hover:border-primary/40 transition-all duration-500">
-                {/* Grid background */}
-                <div className="absolute inset-0 opacity-5">
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `
-                      linear-gradient(rgba(79, 156, 255, 0.3) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(79, 156, 255, 0.3) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '30px 30px'
-                  }} />
-                </div>
+              <div 
+                {...missionBorderEventHandlers}
+                className="relative w-full h-full overflow-hidden rounded-2xl bg-slate-800/10 backdrop-blur-xl shadow-2xl transition-all duration-500 flex flex-col"
+                style={{ 
+                  transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  boxShadow: isMissionHovered 
+                    ? '0 30px 60px -12px rgba(100, 200, 255, 0.1), 0 0 100px rgba(100, 200, 255, 0.2)' 
+                    : '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
+                }}
+              >
+                {/* Animated border canvas */}
+                <canvas
+                  ref={missionBorderCanvasRef}
+                  className="absolute pointer-events-none"
+                  style={{ zIndex: 20 }}
+                />
 
-                {/* Glowing orb */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Corner accents */}
-                <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
-                <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
-                <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
-                <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
-
-                <div className="relative z-10">
-                  <div className="flex items-center mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mr-4 shadow-lg shadow-primary/30">
-                      <Shield className="w-7 h-7 text-white" />
-                    </div>
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                      {t('about.mission.title')}
-                    </h2>
+                <Card className="p-10 h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-primary/20 relative overflow-hidden group hover:border-primary/40 transition-all duration-500">
+                  {/* Grid background */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(rgba(79, 156, 255, 0.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(79, 156, 255, 0.3) 1px, transparent 1px)
+                      `,
+                      backgroundSize: '30px 30px'
+                    }} />
                   </div>
-                  <p className="text-gray-300 text-lg leading-relaxed">
-                    {t('about.mission.description')}
-                  </p>
-                </div>
-              </Card>
+
+                  {/* Glowing orb */}
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Corner accents */}
+                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
+                  <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
+                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
+                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-primary/30 group-hover:border-primary transition-colors duration-300" />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center mb-6">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mr-4 shadow-lg shadow-primary/30">
+                        <Shield className="w-7 h-7 text-white" />
+                      </div>
+                      <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        {t('about.mission.title')}
+                      </h2>
+                    </div>
+                    <p className="text-gray-300 text-lg leading-relaxed">
+                      {t('about.mission.description')}
+                    </p>
+                  </div>
+                </Card>
+              </div>
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <Card className="p-10 h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-accent/20 relative overflow-hidden group hover:border-accent/40 transition-all duration-500">
-                {/* Grid background */}
-                <div className="absolute inset-0 opacity-5">
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `
-                      linear-gradient(rgba(100, 200, 255, 0.3) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(100, 200, 255, 0.3) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '30px 30px'
-                  }} />
-                </div>
+              <div 
+                {...visionBorderEventHandlers}
+                className="relative w-full h-full overflow-hidden rounded-2xl bg-slate-800/10 backdrop-blur-xl shadow-2xl transition-all duration-500 flex flex-col"
+                style={{ 
+                  transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  boxShadow: isVisionHovered 
+                    ? '0 30px 60px -12px rgba(100, 200, 255, 0.1), 0 0 100px rgba(100, 200, 255, 0.2)' 
+                    : '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
+                }}
+              >
+                {/* Animated border canvas */}
+                <canvas
+                  ref={visionBorderCanvasRef}
+                  className="absolute pointer-events-none"
+                  style={{ zIndex: 20 }}
+                />
 
-                {/* Glowing orb */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-accent/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Corner accents */}
-                <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
-                <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
-                <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
-                <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
-
-                <div className="relative z-10">
-                  <div className="flex items-center mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center mr-4 shadow-lg shadow-accent/30">
-                      <Eye className="w-7 h-7 text-white" />
-                    </div>
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-                      {t('about.vision.title')}
-                    </h2>
+                <Card className="p-10 h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-accent/20 relative overflow-hidden group hover:border-accent/40 transition-all duration-500">
+                  {/* Grid background */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(rgba(100, 200, 255, 0.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(100, 200, 255, 0.3) 1px, transparent 1px)
+                      `,
+                      backgroundSize: '30px 30px'
+                    }} />
                   </div>
-                  <p className="text-gray-300 text-lg leading-relaxed">
-                    {t('about.vision.description')}
-                  </p>
-                </div>
-              </Card>
+
+                  {/* Glowing orb */}
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-accent/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Corner accents */}
+                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
+                  <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
+                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
+                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-accent/30 group-hover:border-accent transition-colors duration-300" />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center mb-6">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center mr-4 shadow-lg shadow-accent/30">
+                        <Eye className="w-7 h-7 text-white" />
+                      </div>
+                      <h2 className="text-3xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+                        {t('about.vision.title')}
+                      </h2>
+                    </div>
+                    <p className="text-gray-300 text-lg leading-relaxed">
+                      {t('about.vision.description')}
+                    </p>
+                  </div>
+                </Card>
+              </div>
             </motion.div>
           </div>
         </motion.div>
@@ -358,6 +394,15 @@ const About = () => {
                     <h3 className="text-xl font-bold mb-2 text-white">{value.title}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">{value.description}</p>
                   </div>
+                  {/* Animated line effect */}
+                  <div 
+                    className="w-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-700 rounded-full mt-4"
+                    style={{
+                      width: '60px',
+                      boxShadow: '0 0 20px rgba(100, 200, 255, 0.8)',
+                      margin: '16px auto 0'
+                    }}
+                  />
                 </Card>
               </motion.div>
             ))}

@@ -90,7 +90,7 @@ const ChatBot = () => {
   // Message animation variants
   const messageVariants = {
     enter: {
-      opacity: [0, 1],
+      opacity:1,
       y: [15, 0],
       transition: { duration: 0.35, ease: "easeOut" }
     },

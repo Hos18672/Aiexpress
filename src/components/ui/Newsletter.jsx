@@ -85,6 +85,15 @@ const Newsletter = () => {
           </form>
         )}
       </Card>
+      {/* Animated line effect */}
+      <div 
+        className="w-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-700 rounded-full mt-4"
+        style={{
+          width: '60px',
+          boxShadow: '0 0 20px rgba(100, 200, 255, 0.8)',
+          margin: '16px auto 0'
+        }}
+      />
     </motion.div>
   );
 };
