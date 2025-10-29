@@ -10,8 +10,12 @@ const TeamMemberCard = ({ member, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMouseNear, setIsMouseNear] = useState(false);
+  const [borderOpacity, setBorderOpacity] = useState(0);
+  const [distanceToCard, setDistanceToCard] = useState(150);
   const targetPosRef = useRef(0);
   const currentPosRef = useRef(0);
+  const targetOpacityRef = useRef(0);
+  const currentOpacityRef = useRef(0);
 
   // Track global mouse position for detecting nearby mouse
   useEffect(() => {
@@ -31,6 +35,7 @@ const TeamMemberCard = ({ member, index }) => {
       // Show border when mouse is within 150px of card
       if (distance < 150) {
         setIsMouseNear(true);
+        setDistanceToCard(distance);
         // Calculate relative position even when outside
         setMousePos({
           x: mouseX - rect.left,
@@ -38,6 +43,7 @@ const TeamMemberCard = ({ member, index }) => {
         });
       } else {
         setIsMouseNear(false);
+        setDistanceToCard(150);
       }
     };
     
@@ -168,11 +174,19 @@ const TeamMemberCard = ({ member, index }) => {
       // Draw static border background
       ctx.beginPath();
       ctx.roundRect(padding, padding, w, h, borderRadius);
-      ctx.strokeStyle = isMouseNear || isHovered ? 'rgba(100, 200, 255, 0.1)' : 'rgba(100, 200, 255, 0.1)';
+      ctx.strokeStyle = 'rgba(100, 200, 255, 0.1)';
       ctx.lineWidth = 2;
       ctx.stroke();
       
-      if (!isMouseNear && !isHovered) {
+      // Update target opacity based on hover/mouse near state
+      targetOpacityRef.current = (isMouseNear || isHovered) ? 1 : 0;
+      
+      // Smooth opacity transition
+      currentOpacityRef.current += (targetOpacityRef.current - currentOpacityRef.current) * 0.1;
+      setBorderOpacity(currentOpacityRef.current);
+      
+      // Only draw animated border if opacity is significant
+      if (currentOpacityRef.current < 0.01) {
         borderAnimationRef.current = requestAnimationFrame(drawBorder);
         return;
       }
@@ -278,9 +292,16 @@ const TeamMemberCard = ({ member, index }) => {
       // Keep currentPos within bounds using proper modulo
       currentPosRef.current = ((currentPosRef.current % perimeter) + perimeter) % perimeter;
       
-      const gradientLength = perimeter * 0.35;
+      // Dynamic gradient length based on distance to card
+      // When mouse is far (150px): shorter line (15% of perimeter)
+      // When mouse is close (0px): longer line (40% of perimeter)
+      const maxDistance = 150;
+      const distanceRatio = Math.max(0, Math.min(1, 1 - (distanceToCard / maxDistance)));
+      const minGradientLength = perimeter * 0.15;
+      const maxGradientLength = perimeter * 0.40;
+      const gradientLength = minGradientLength + (maxGradientLength - minGradientLength) * distanceRatio;
       
-      // Draw the gradient line
+      // Draw the gradient line with smooth opacity
       const segments = 100;
       for (let i = 0; i < segments; i++) {
         const segProgress = i / segments;
@@ -304,7 +325,8 @@ const TeamMemberCard = ({ member, index }) => {
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         
-        ctx.strokeStyle = `hsla(200, 100%, 70%, ${alpha})`;
+        // Apply smooth fade in/out opacity
+        ctx.strokeStyle = `hsla(200, 100%, 70%, ${alpha * currentOpacityRef.current})`;
         ctx.lineWidth = 4;
         ctx.lineCap = 'round';
         ctx.stroke();
@@ -325,7 +347,7 @@ const TeamMemberCard = ({ member, index }) => {
         cancelAnimationFrame(borderAnimationRef.current);
       }
     };
-  }, [isHovered, isMouseNear, mousePos]);
+  }, [isHovered, isMouseNear, mousePos, distanceToCard]);
 
   const cardVariants = {
     initial: { opacity: 0, y: 40, scale: 0.9 },

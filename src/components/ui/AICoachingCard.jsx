@@ -15,6 +15,7 @@ export default function AICoachingCard({
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMouseNear, setIsMouseNear] = useState(false);
   const [borderOpacity, setBorderOpacity] = useState(0);
+  const [distanceToCard, setDistanceToCard] = useState(150);
   const targetPosRef = useRef(0);
   const currentPosRef = useRef(0);
   const targetOpacityRef = useRef(0);
@@ -38,6 +39,7 @@ export default function AICoachingCard({
       // Show border when mouse is within 150px of card
       if (distance < 150) {
         setIsMouseNear(true);
+        setDistanceToCard(distance);
         // Calculate relative position even when outside
         setMousePos({
           x: mouseX - rect.left,
@@ -45,6 +47,7 @@ export default function AICoachingCard({
         });
       } else {
         setIsMouseNear(false);
+        setDistanceToCard(150);
       }
     };
     
@@ -293,7 +296,14 @@ export default function AICoachingCard({
       // Keep currentPos within bounds using proper modulo
       currentPosRef.current = ((currentPosRef.current % perimeter) + perimeter) % perimeter;
       
-      const gradientLength = perimeter * 0.35;
+      // Dynamic gradient length based on distance to card
+      // When mouse is far (150px): shorter line (15% of perimeter)
+      // When mouse is close (0px): longer line (40% of perimeter)
+      const maxDistance = 150;
+      const distanceRatio = Math.max(0, Math.min(1, 1 - (distanceToCard / maxDistance)));
+      const minGradientLength = perimeter * 0.15;
+      const maxGradientLength = perimeter * 0.40;
+      const gradientLength = minGradientLength + (maxGradientLength - minGradientLength) * distanceRatio;
       
       // Draw the gradient line with smooth opacity
       const segments = 100;
@@ -341,7 +351,7 @@ export default function AICoachingCard({
         cancelAnimationFrame(borderAnimationRef.current);
       }
     };
-  }, [isHovered, isMouseNear, mousePos]);
+  }, [isHovered, isMouseNear, mousePos, distanceToCard]);
 
   return (
       <div 
