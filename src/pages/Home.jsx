@@ -245,8 +245,15 @@ const Home = () => {
               >
                 <Button 
                   onClick={() => scrollToSection('contact')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      scrollToSection('contact');
+                    }
+                  }}
                   size="lg" 
                   className="px-10 py-4 text-lg relative overflow-hidden group bg-gradient-to-r from-primary to-accent"
+                  tabIndex={0}
                 >
                   <motion.div
                     className="absolute inset-0 bg-white/20"
@@ -267,9 +274,16 @@ const Home = () => {
               >
                 <Button 
                   onClick={() => scrollToSection('services')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      scrollToSection('services');
+                    }
+                  }}
                   variant="outline" 
                   size="lg" 
                   className="px-10 py-4 text-lg border-2 border-primary/50 hover:border-primary hover:bg-primary/10"
+                  tabIndex={0}
                 >
                   <Globe className="w-5 h-5 mr-2" />
                   {t('exploreServices')}

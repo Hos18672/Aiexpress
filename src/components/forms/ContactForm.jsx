@@ -57,17 +57,17 @@ const ContactForm = () => {
   const inputVariants = {
     idle: { scale: 1 },
     focus: { 
-      scale: 1.02,
-      transition: { duration: 0.2 }
+      scale: 1.01,
+      transition: { duration: 0.1 }
     }
   };
 
   const labelVariants = {
     idle: { y: 0, opacity: 0.7 },
     focus: { 
-      y: -2,
+      y: -1,
       opacity: 1,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.1 }
     }
   };
 
@@ -296,7 +296,7 @@ const ContactForm = () => {
                 
                 {/* Submit Button */}
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button 

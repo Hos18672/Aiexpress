@@ -388,11 +388,18 @@ const Navbar = () => {
                 
                 <motion.button 
                   onClick={() => handleScrollToSection('/#contact', 'contact')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleScrollToSection('/#contact', 'contact');
+                    }
+                  }}
                   variants={{
                     open: { y: 0, opacity: 1 },
                     closed: { y: 20, opacity: 0 }
                   }}
                   className="w-full mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
+                  tabIndex={0}
                 >
                   {t('getStarted')}
                 </motion.button>

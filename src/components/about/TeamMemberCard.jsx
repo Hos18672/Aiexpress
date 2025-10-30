@@ -256,7 +256,7 @@ const TeamMemberCard = ({ member, index }) => {
       const findClosestPointOnBorder = () => {
         let minDist = Infinity;
         let closestDist = 0;
-        const samples = 300;
+        const samples = 150; // Reduced from 300 for better performance
         
         for (let i = 0; i < samples; i++) {
           const dist = (i / samples) * perimeter;
@@ -302,7 +302,7 @@ const TeamMemberCard = ({ member, index }) => {
       const gradientLength = minGradientLength + (maxGradientLength - minGradientLength) * distanceRatio;
       
       // Draw the gradient line with smooth opacity
-      const segments = 100;
+      const segments = 50; // Reduced from 100 for better performance
       for (let i = 0; i < segments; i++) {
         const segProgress = i / segments;
         const dist = currentPosRef.current - gradientLength / 2 + segProgress * gradientLength;
@@ -426,6 +426,7 @@ const TeamMemberCard = ({ member, index }) => {
         boxShadow: isHovered 
           ? '0 30px 60px -12px rgba(100, 200, 255, 0.1), 0 0 100px rgba(100, 200, 255, 0.2)' 
           : '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
+        willChange: 'box-shadow, transform',
       }}
       onMouseEnter={() => {
         setIsHovered(true);
@@ -488,6 +489,9 @@ const TeamMemberCard = ({ member, index }) => {
               alt={member.name} 
               className="absolute inset-1 w-[calc(100%-8px)] h-[calc(100%-8px)] object-cover rounded-full z-20"
               variants={imageVariants}
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
             />
           </motion.div>
           

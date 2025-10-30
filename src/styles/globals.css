@@ -35,29 +35,6 @@ body {
   background: linear-gradient(var(--secondary), var(--accent));
 }
 
-/* Glow effects */
-.glow-primary {
-  box-shadow: 0 0 10px rgba(79, 156, 255, 0.5);
-}
-
-.glow-secondary {
-  box-shadow: 0 0 10px rgba(157, 108, 255, 0.5);
-}
-
-.glow-accent {
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.7);
-}
-
-.neon-border {
-  border: 1px solid rgba(79, 156, 255, 0.3);
-  box-shadow: 0 0 5px rgba(79, 156, 255, 0.2);
-}
-
-.neon-border:hover {
-  border: 1px solid var(--primary);
-  box-shadow: 0 0 10px rgba(79, 156, 255, 0.5);
-}
-
 /* Animation classes */
 .animate-pulse-slow {
   animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -72,31 +49,5 @@ body {
   }
 }
 
-/* Text shadow for better visibility */
-.text-glow {
-  text-shadow: 0 0 8px rgba(79, 156, 255, 0.4);
-}
 
-/* Enhanced card styles */
-.enhanced-card {
-  background: linear-gradient(135deg, rgba(10,14,28,0.98) 0%, rgba(15,20,40,0.95) 45%, rgba(25,35,70,0.92) 100%);
-  border-radius: 1.25rem;
-  border: 1px solid rgba(79,156,255,0.25);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 25px rgba(79,156,255,0.12);
-  color: #ffffff;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
-}
 
-/* Overlay pattern */
-.card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(120deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0.05) 100%);
-  pointer-events: none;
-  z-index: 0;
-}

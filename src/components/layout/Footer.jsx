@@ -46,7 +46,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background border-t border-gray-800 pt-12 pb-8">
+    <footer className="bg-background border-t border-gray-800 pt-12 pb-8" role="contentinfo">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <motion.div
@@ -73,6 +73,7 @@ const Footer = () => {
                   key={index} 
                   href={social.url} 
                   className="text-gray-400 hover:text-primary transition-colors duration-300"
+                  aria-label={`AI Express on ${social.icon.type.name}`}
                 >
                   {social.icon}
                 </a>
@@ -96,6 +97,7 @@ const Footer = () => {
                   <button 
                     onClick={() => handleScrollToSection(link.id)}
                     className="flex items-center text-gray-400 hover:text-primary transition-colors text-left"
+                    aria-label={`Scroll to ${link.name} section`}
                   >
                     {link.icon}
                     <span className="ml-2">{link.name}</span>

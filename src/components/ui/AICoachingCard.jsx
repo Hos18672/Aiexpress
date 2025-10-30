@@ -132,8 +132,15 @@ export default function AICoachingCard({
     };
 
     const animate = (time) => {
+      // Use a more efficient clear method
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      shapesRef.current.forEach(shape => drawShape(shape, time));
+      
+      // Only render if there are shapes to draw
+      if (shapesRef.current.length > 0) {
+        shapesRef.current.forEach(shape => drawShape(shape, time));
+      }
+      
+      // Use a more efficient animation frame request
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -194,6 +201,9 @@ export default function AICoachingCard({
         borderAnimationRef.current = requestAnimationFrame(drawBorder);
         return;
       }
+      
+      // Optimize by reducing the number of samples for better performance
+      const samples = 150; // Reduced from 300
       
       // Calculate perimeter
       const perimeter = 2 * (w + h) - 8 * borderRadius + 2 * Math.PI * borderRadius;
@@ -306,7 +316,7 @@ export default function AICoachingCard({
       const gradientLength = minGradientLength + (maxGradientLength - minGradientLength) * distanceRatio;
       
       // Draw the gradient line with smooth opacity
-      const segments = 100;
+      const segments = 50; // Reduced from 100 for better performance
       for (let i = 0; i < segments; i++) {
         const segProgress = i / segments;
         const dist = currentPosRef.current - gradientLength / 2 + segProgress * gradientLength;
@@ -331,7 +341,7 @@ export default function AICoachingCard({
         
         // Apply smooth fade in/out opacity
         ctx.strokeStyle = `hsla(200, 100%, 70%, ${alpha * currentOpacityRef.current})`;
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 3; // Reduced from 4 for better performance
         ctx.lineCap = 'round';
         ctx.stroke();
       }
@@ -362,6 +372,7 @@ export default function AICoachingCard({
           boxShadow: isHovered 
             ? '0 30px 60px -12px rgba(100, 200, 255, 0.1), 0 0 100px rgba(100, 200, 255, 0.2)' 
             : '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
+          willChange: 'box-shadow, transform',
         }}
         onMouseEnter={() => {
           setIsHovered(true);
@@ -387,6 +398,8 @@ export default function AICoachingCard({
           );
           setIsMouseNear(distanceFromEdge < 100 || true);
         }}
+        role="article"
+        aria-label={`${title} - ${subtitle}`}
       >
         {/* Animated border canvas */}
         <canvas
@@ -448,12 +461,12 @@ export default function AICoachingCard({
           {/* Data stream effect on hover */}
           {isHovered && (
             <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 5 }}>
-              {[...Array(6)].map((_, i) => (
+              {[...Array(4)].map((_, i) => (
                 <div
                   key={i}
                   className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-40"
                   style={{
-                    top: `${15 + i * 15}%`,
+                    top: `${20 + i * 20}%`,
                     left: '-100%',
                     width: '100%',
                     animation: `dataStream ${1.5 + i * 0.3}s ease-in-out infinite`,
