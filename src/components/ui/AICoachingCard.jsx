@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 export default function AICoachingCard({
   title = "AI Coaching",
-  subtitle = "Personalized AI Guidance",
-  icon = "🧠",
-  accentColor = "#64c8ff"
+  subtitle = "Personalized AI Guidance"
 }) {
   const canvasRef = useRef(null);
   const borderCanvasRef = useRef(null);
@@ -14,7 +12,6 @@ export default function AICoachingCard({
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMouseNear, setIsMouseNear] = useState(false);
-  const [borderOpacity, setBorderOpacity] = useState(0);
   const [distanceToCard, setDistanceToCard] = useState(150);
   const targetPosRef = useRef(0);
   const currentPosRef = useRef(0);
@@ -194,16 +191,12 @@ export default function AICoachingCard({
       
       // Smooth opacity transition
       currentOpacityRef.current += (targetOpacityRef.current - currentOpacityRef.current) * 0.1;
-      setBorderOpacity(currentOpacityRef.current);
       
       // Only draw animated border if opacity is significant
       if (currentOpacityRef.current < 0.01) {
         borderAnimationRef.current = requestAnimationFrame(drawBorder);
         return;
       }
-      
-      // Optimize by reducing the number of samples for better performance
-      const samples = 150; // Reduced from 300
       
       // Calculate perimeter
       const perimeter = 2 * (w + h) - 8 * borderRadius + 2 * Math.PI * borderRadius;

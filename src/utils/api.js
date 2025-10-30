@@ -1,14 +1,12 @@
 // Mock API utility for demonstration purposes
 // In a real application, this would connect to your backend
 
-const API_BASE_URL = '/api';
-
 export const api = {
   // Services
   getServices: async () => {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500));
-    return require('../data/servicesData.js').servicesData;
+    return import('../data/servicesData.js').then(module => module.servicesData);
   },
 
   updateService: async (service) => {
@@ -30,7 +28,7 @@ export const api = {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500));
     try {
-      const translations = require(`../data/translations/${language}.json`);
+      const translations = await import(`../data/translations/${language}.json`);
       return translations;
     } catch (error) {
       console.error('Error loading translations:', error);

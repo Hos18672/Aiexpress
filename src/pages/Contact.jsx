@@ -7,7 +7,7 @@ import Button from '../components/ui/Button';
 import ContactForm from '../components/forms/ContactForm';
 
 const Contact = () => {
-  const { t, currentLanguage } = useLanguage();
+  const { t } = useLanguage();
 
   // Contact info data
   const contactInfo = [

@@ -12,14 +12,12 @@ import {
   Target,
   Award,
   Lightbulb,
-  Sparkles,
-  Zap,
   Building,
   TrendingUp
 } from 'lucide-react';
 
 const About = () => {
-  const { t, currentLanguage } = useLanguage();
+  const { t } = useLanguage();
 
   const teamMembers = [
     {
@@ -228,21 +226,12 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div variants={itemVariants}>
               <div 
-                {...missionBorderEventHandlers}
                 className="relative w-full h-full overflow-hidden rounded-2xl bg-slate-800/10 backdrop-blur-xl shadow-2xl transition-all duration-500 flex flex-col"
                 style={{ 
                   transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                  boxShadow: isMissionHovered 
-                    ? '0 30px 60px -12px rgba(100, 200, 255, 0.1), 0 0 100px rgba(100, 200, 255, 0.2)' 
-                    : '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
+                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
                 }}
               >
-                {/* Animated border canvas */}
-                <canvas
-                  ref={missionBorderCanvasRef}
-                  className="absolute pointer-events-none"
-                  style={{ zIndex: 20 }}
-                />
 
                 <Card className="p-10 h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-primary/20 relative overflow-hidden group hover:border-primary/40 transition-all duration-500">
                   {/* Grid background */}
@@ -284,21 +273,12 @@ const About = () => {
             
             <motion.div variants={itemVariants}>
               <div 
-                {...visionBorderEventHandlers}
                 className="relative w-full h-full overflow-hidden rounded-2xl bg-slate-800/10 backdrop-blur-xl shadow-2xl transition-all duration-500 flex flex-col"
                 style={{ 
                   transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                  boxShadow: isVisionHovered 
-                    ? '0 30px 60px -12px rgba(100, 200, 255, 0.1), 0 0 100px rgba(100, 200, 255, 0.2)' 
-                    : '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
+                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.8)',
                 }}
               >
-                {/* Animated border canvas */}
-                <canvas
-                  ref={visionBorderCanvasRef}
-                  className="absolute pointer-events-none"
-                  style={{ zIndex: 20 }}
-                />
 
                 <Card className="p-10 h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-accent/20 relative overflow-hidden group hover:border-accent/40 transition-all duration-500">
                   {/* Grid background */}

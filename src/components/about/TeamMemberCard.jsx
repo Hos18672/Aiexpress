@@ -10,7 +10,6 @@ const TeamMemberCard = ({ member, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMouseNear, setIsMouseNear] = useState(false);
-  const [borderOpacity, setBorderOpacity] = useState(0);
   const [distanceToCard, setDistanceToCard] = useState(150);
   const targetPosRef = useRef(0);
   const currentPosRef = useRef(0);
@@ -183,7 +182,6 @@ const TeamMemberCard = ({ member, index }) => {
       
       // Smooth opacity transition
       currentOpacityRef.current += (targetOpacityRef.current - currentOpacityRef.current) * 0.1;
-      setBorderOpacity(currentOpacityRef.current);
       
       // Only draw animated border if opacity is significant
       if (currentOpacityRef.current < 0.01) {

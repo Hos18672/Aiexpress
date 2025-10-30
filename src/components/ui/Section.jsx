@@ -11,7 +11,6 @@ const Section = ({
   titleComponent: TitleComponent = motion.h2,
   titleClassName = '',
   subtitleClassName = '',
-  containerVariants,
   itemVariants,
   badge,
   badgeIcon,

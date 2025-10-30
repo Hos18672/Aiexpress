@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import SectionWrapper from './SectionWrapper';
 import TestimonialCard from './TestimonialCard';
-import { Star, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
 
 const Testimonials = () => {
   const testimonials = [
@@ -73,7 +73,7 @@ const Testimonials = () => {
             variants={headingVariants}
             className="text-gray-400 max-w-2xl mx-auto"
           >
-            Don't just take our word for it. Here's what businesses like yours have achieved with our AI solutions.
+            Don&apos;t just take our word for it. Here&apos;s what businesses like yours have achieved with our AI solutions.
           </motion.p>
         </div>
 

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Card from './Card';
 import { useAnimatedBorder } from '../../hooks/useAnimatedBorder';
 
-const TestimonialCard = ({ testimonial, index }) => {
+const TestimonialCard = ({ testimonial }) => {
   const { borderCanvasRef, isHovered, borderEventHandlers } = useAnimatedBorder();
   
   // Animation variants from JSON
@@ -65,7 +65,7 @@ const TestimonialCard = ({ testimonial, index }) => {
               <p className="text-sm text-gray-400">{testimonial.company}</p>
             </div>
           </div>
-          <p className="text-gray-300 italic">"{testimonial.quote}"</p>
+          <p className="text-gray-300 italic">&quot;{testimonial.quote}&quot;</p>
           <div className="flex mt-4">
             {[...Array(5)].map((_, i) => (
               <span key={i} className="text-yellow-400">★</span>

@@ -22,25 +22,15 @@ import {
 } from 'lucide-react';
 
 const Admin = () => {
-  const { t, currentLanguage } = useLanguage();
+  const { t } = useLanguage();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
 
   // Load translations
-  const loadTranslations = () => {
-    try {
-      const enTranslations = require('../data/translations/en.json');
-      const deTranslations = require('../data/translations/de.json');
-      return currentLanguage === 'en' ? enTranslations : deTranslations;
-    } catch (error) {
-      console.error('Error loading translations:', error);
-      return {};
-    }
-  };
+  // Load translations
+  const translations = t;
 
-  const translations = loadTranslations();
-
-  const handleLogin = (credentials) => {
+  const handleLogin = () => {
     // In a real app, you would authenticate with a backend
     setIsLoggedIn(true);
   };

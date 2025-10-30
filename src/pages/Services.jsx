@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import SectionWrapper from '../components/ui/SectionWrapper';
-import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import ServiceFilter from '../components/services/ServiceFilter';
 import ServiceCard from '../components/services/ServiceCard';
@@ -10,7 +9,7 @@ import { servicesData } from '../data/servicesData';
 import { staggerContainer } from '../components/animations/motionVariants';
 
 const Services = () => {
-  const { t, currentLanguage } = useLanguage();
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedService, setSelectedService] = useState(null);
 
@@ -63,7 +62,6 @@ const Services = () => {
             <ServiceCard 
               key={service.id} 
               service={service} 
-              currentLanguage={currentLanguage}
               onOpenDetails={setSelectedService}
             />
           ))}
@@ -81,7 +79,7 @@ const Services = () => {
             <div className="p-6">
               <div className="flex justify-between items-start mb-4">
                 <h3 className="text-2xl font-bold">
-                  {selectedService.title[currentLanguage] || selectedService.title.en}
+                  {selectedService.title.en}
                 </h3>
                 <button 
                   onClick={() => setSelectedService(null)}
@@ -92,7 +90,7 @@ const Services = () => {
               </div>
               <div className="text-4xl mb-4 text-center">{selectedService.icon}</div>
               <p className="text-gray-300 mb-6">
-                {selectedService.description[currentLanguage] || selectedService.description.en}
+                {selectedService.description.en}
               </p>
               <div className="flex justify-end">
                 <Button onClick={() => setSelectedService(null)}>{t('close')}</Button>

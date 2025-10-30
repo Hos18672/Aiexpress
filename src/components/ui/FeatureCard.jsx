@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import { useAnimatedBorder } from '../../hooks/useAnimatedBorder';
 
-const FeatureCard = ({ icon, title, description, index }) => {
+const FeatureCard = ({ icon, title, description }) => {
   const { borderCanvasRef, isHovered, borderEventHandlers } = useAnimatedBorder();
   
   return (

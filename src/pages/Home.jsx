@@ -3,10 +3,8 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import SectionWrapper from '../components/ui/SectionWrapper';
 import AnimatedLogo from '../components/ui/AnimatedLogo';
-import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
-import Newsletter from '../components/ui/Newsletter';
-import Testimonials from '../components/ui/Testimonials';
+import Card from '../components/ui/Card';
 import TeamMemberCard from '../components/about/TeamMemberCard';
 import ContactForm from '../components/forms/ContactForm';
 import AICoachingCard from '../components/ui/AICoachingCard';
@@ -14,7 +12,6 @@ import {
   Bot, 
   Users, 
   Settings, 
-  GraduationCap, 
   Wrench, 
   Eye,
   Mail,
@@ -421,7 +418,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesData.map((service, index) => (
+            {servicesData.map((service) => (
               <motion.div
                 key={service.id}
                 variants={itemVariants}
@@ -476,7 +473,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {caseStudies.map((study, index) => (
+            {caseStudies.map((study) => (
               <motion.div
                 key={study.id}
                 variants={itemVariants}

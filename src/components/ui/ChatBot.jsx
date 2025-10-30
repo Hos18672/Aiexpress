@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Card from './Card';
 import Button from './Button';
 import { MessageCircle, Send, X, Bot } from 'lucide-react';
 
@@ -98,19 +97,6 @@ const ChatBot = () => {
       scale: 1.02,
       boxShadow: "0 0 15px rgba(79,156,255,0.25)",
       transition: { duration: 0.25, ease: "easeOut" }
-    }
-  };
-
-  // Typing indicator animation
-  const typingIndicatorVariants = {
-    animate: {
-      scale: [1, 1.3, 1],
-      opacity: [0.6, 1, 0.6],
-      transition: {
-        repeat: Infinity,
-        duration: 1.2,
-        ease: "easeInOut"
-      }
     }
   };
 
