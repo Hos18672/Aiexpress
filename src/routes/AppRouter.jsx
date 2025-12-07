@@ -7,7 +7,7 @@ import Cookie from '../pages/Cookie';
 import NotFound from '../pages/NotFound';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import ChatBot from '../components/ui/ChatBot';
+// import ChatBot from '../components/ui/ChatBot';
 
 const AppRouter = () => {
   return (
@@ -23,7 +23,7 @@ const AppRouter = () => {
         </Routes>
       </main>
       <Footer />
-      <ChatBot />
+      {/* <ChatBot /> */}
     </div>
   );
 };
