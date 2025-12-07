@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
-import { api } from '../../utils/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { User, Mail, MessageSquare, Send, Zap } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
@@ -16,6 +15,7 @@ const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
 
   const handleChange = (e) => {
@@ -28,18 +28,40 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(false);
     
     try {
-      await api.submitContactForm(formData);
-      setSubmitSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
+      // Create form data for Web3Forms
+      const formDataWeb3 = new FormData();
+      formDataWeb3.append('access_key', 'b9abd917-d30e-44fc-8005-3b2dce69273a');
+      formDataWeb3.append('name', formData.name);
+      formDataWeb3.append('email', formData.email);
+      formDataWeb3.append('message', formData.message);
       
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
+      // Submit to Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataWeb3
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        setSubmitSuccess(true);
+        setFormData({ name: '', email: '', message: '' });
+        
+        setTimeout(() => {
+          setSubmitSuccess(false);
+        }, 5000);
+      } else {
+        throw new Error(result.message || 'Failed to submit form');
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Error submitting form. Please try again.');
+      setSubmitError(true);
+      setTimeout(() => {
+        setSubmitError(false);
+      }, 5000);
     } finally {
       setIsSubmitting(false);
     }
@@ -72,6 +94,16 @@ const ContactForm = () => {
   };
 
   const successVariants = {
+    hidden: { scale: 0.8, opacity: 0, rotateX: -20 },
+    visible: { 
+      scale: 1, 
+      opacity: 1,
+      rotateX: 0,
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+    }
+  };
+
+  const errorVariants = {
     hidden: { scale: 0.8, opacity: 0, rotateX: -20 },
     visible: { 
       scale: 1, 
@@ -137,6 +169,33 @@ const ContactForm = () => {
                 {t('responseIncoming')}
               </p>
             </motion.div>
+          ) : submitError ? (
+            <motion.div
+              variants={errorVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-center py-12"
+            >
+              <motion.div
+                className="w-20 h-20 bg-gradient-to-br from-red-500/30 to-red-600/30 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-red-500/50 relative"
+                animate={{
+                  boxShadow: [
+                    '0 0 20px rgba(239, 68, 68, 0.3)',
+                    '0 0 40px rgba(239, 68, 68, 0.5)',
+                    '0 0 20px rgba(239, 68, 68, 0.3)'
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Send className="w-10 h-10 text-red-400" />
+              </motion.div>
+              <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+                {t('errorOccurred')}
+              </h3>
+              <p className="text-gray-400 text-lg">
+                {t('errorMessage')}
+              </p>
+            </motion.div>
           ) : (
             <>
               <motion.div 
@@ -157,6 +216,9 @@ const ContactForm = () => {
               </motion.div>
 
               <form onSubmit={handleSubmit} className="space-y-8">
+                {/* Hidden access key field */}
+                <input type="hidden" name="access_key" value="b9abd917-d30e-44fc-8005-3b2dce69273a" />
+                
                 {/* Name Field */}
                 <motion.div 
                   className="relative"

@@ -138,7 +138,9 @@
     "messageTransmitted": "Nachricht gesendet",
     "responseIncoming": "Ihre Nachricht wurde empfangen. Antwort unterwegs...",
     "initiateContact": "Kontakt aufnehmen",
-    "secureProtocol": "Sicherer Übertragungsprotokoll"
+    "secureProtocol": "Sicherer Übertragungsprotokoll",
+    "errorOccurred": "Fehler aufgetreten",
+    "errorMessage": "Beim Senden Ihrer Nachricht ist ein Problem aufgetreten. Bitte versuchen Sie es erneut."
   },
   "cta": {
     "title": "Starten Sie Ihre KI-Transformation",
