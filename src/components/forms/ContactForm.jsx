@@ -89,24 +89,13 @@ const ContactForm = () => {
       viewport={{ once: true }}
       style={{ perspective: 1000 }}
     >
-      <Card className="relative p-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden border-2 border-primary/20">
-        {/* Futuristic grid background */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              linear-gradient(rgba(79, 156, 255, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(79, 156, 255, 0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px'
-          }} />
-        </div>
-
+      <Card className="relative p-10 ">
         {/* Glowing corner accents */}
         <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 blur-3xl rounded-full" />
         <div className="absolute bottom-0 left-0 w-40 h-40 bg-accent/20 blur-3xl rounded-full" />
 
         {/* Animated border */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute  inset-0 pointer-events-none">
           <motion.div
             className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
             animate={{

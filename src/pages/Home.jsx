@@ -48,12 +48,12 @@ const Home = () => {
     {
       name: "Reza Hossaini",
       role: "CTO & Gründer",
-      image: "https://muwgjsyjyyzzfmzpwrns.supabase.co/storage/v1/object/sign/photos/reza_3.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82Yzg3YzMxYS0yOTA0LTQ4OGMtYjczNC1kNWQyMTgxZGQ3MzAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwaG90b3MvcmV6YV8zLnBuZyIsImlhdCI6MTc2MTE1Nzc2NSwiZXhwIjoxNzkyNjkzNzY1fQ.vT9JW9j3XRRhU4-4nDpRa-h4QBGgI91sSMg5-efoj7Y"
+      image: "/src/assets/reza.png"
     },
     {
       name: "Hikmatullah Razaghi",
       role: "CTO & Gründer",
-      image: "https://muwgjsyjyyzzfmzpwrns.supabase.co/storage/v1/object/sign/photos/Hikmat.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82Yzg3YzMxYS0yOTA0LTQ4OGMtYjczNC1kNWQyMTgxZGQ3MzAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwaG90b3MvSGlrbWF0LnBuZyIsImlhdCI6MTc2MTE1NzE2NiwiZXhwIjoyMzkxODc3MTY2fQ.GP7XWz53K4IASC63_wA1_KOjr0eLujorkkyyneChErc"
+      image: "/src/assets/Hikmat.png"
     },
   ];
 
@@ -116,11 +116,11 @@ const Home = () => {
       title: t('contact.phone') || "Phone",
       content: t('contact.info.phone') || "+1 (555) 123-4567"
     },
-    {
-      icon: <MapPin className="w-6 h-6 text-primary" />,
-      title: t('contact.address') || "Address",
-      content: t('contact.info.address') || "123 Tech Street, San Francisco, CA"
-    }
+    // {
+    //   icon: <MapPin className="w-6 h-6 text-primary" />,
+    //   title: t('contact.address') || "Address",
+    //   content: t('contact.info.address') || "123 Tech Street, San Francisco, CA"
+    // }
   ];
 
   // Function to scroll to a section
@@ -658,7 +658,7 @@ const Home = () => {
 
             <motion.div variants={itemVariants}>
               <div className="space-y-8">
-                <Card className="p-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-primary/20 relative overflow-hidden">
+                {/* <Card className="p-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-primary/20 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 blur-3xl rounded-full" />
                   <div className="relative z-10">
                     <div className="flex items-start">
@@ -688,7 +688,7 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                </Card>
+                </Card> */}
 
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
@@ -705,113 +705,6 @@ const Home = () => {
                     </Card>
                   ))}
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      </SectionWrapper>
-      {/* CTA Section */}
-      <SectionWrapper id="cta" className="relative">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-12 md:p-16 border-2 border-primary/20 overflow-hidden"
-        >
-          {/* Futuristic grid background */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `
-                linear-gradient(rgba(79, 156, 255, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(79, 156, 255, 0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '40px 40px'
-            }} />
-          </div>
-
-          {/* Glowing orbs */}
-          <div className="absolute top-0 left-0 w-64 h-64 bg-primary/20 blur-3xl rounded-full" />
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-accent/20 blur-3xl rounded-full" />
-
-          {/* Animated border */}
-          <motion.div
-            className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"
-            animate={{
-              x: ['-100%', '100%']
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-
-          <div className="max-w-4xl mx-auto text-center relative z-10">
-            <motion.div
-              variants={itemVariants}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-8"
-            >
-              <Rocket className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">{t('readyToTransform')}</span>
-            </motion.div>
-
-            <motion.h2
-              variants={itemVariants}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            >
-              <span className="bg-gradient-to-r from-white via-primary to-accent bg-clip-text text-transparent">
-                {t('launchTransformation')}
-              </span>
-            </motion.h2>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-gray-300 mb-10 text-xl leading-relaxed"
-            >
-              {t('joinCompanies')}
-            </motion.p>
-
-            <motion.div variants={itemVariants}>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  onClick={() => scrollToSection('contact')}
-                  size="lg" 
-                  className="px-12 py-5 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 relative overflow-hidden group"
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: '-100%' }}
-                    whileHover={{ x: '100%' }}
-                    transition={{ duration: 0.6 }}
-                  />
-                  <span className="relative z-10 flex items-center justify-center">
-                    <User className="w-5 h-5 mr-3" />
-                    {t('scheduleFreeConsultation')}
-                  </span>
-                </Button>
-              </motion.div>
-            </motion.div>
-
-            {/* Trust indicators */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-gray-400"
-            >
-              <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-primary" />
-                <span>{t('cta.trustIndicators.secure')}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-primary" />
-                <span>{t('cta.trustIndicators.quick')}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-primary" />
-                <span>{t('cta.trustIndicators.proven')}</span>
               </div>
             </motion.div>
           </div>

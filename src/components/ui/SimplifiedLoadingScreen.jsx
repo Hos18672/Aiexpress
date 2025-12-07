@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import logo from '../../assets/logo.png';
 
 const SimplifiedLoadingScreen = () => {
   return (
@@ -10,6 +11,18 @@ const SimplifiedLoadingScreen = () => {
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="text-center"
       >
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.1, duration: 0.3 }}
+          className="mb-6"
+        >
+          <img 
+            src={logo} 
+            alt="AI Express Logo" 
+            className="w-32 h-32 mx-auto object-contain"
+          />
+        </motion.div>
 
         <motion.h1
           initial={{ y: 20, opacity: 0 }}

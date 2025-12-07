@@ -3,7 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../../context/LanguageContext';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const location = useLocation();
@@ -215,18 +216,16 @@ const Navbar = () => {
             onClick={() => handleScrollToSection('/', 'home')}
           >
             <motion.div 
-              className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/30"
-              whileHover={{ scale: 1.05, rotate: 5 }}
+              className="relative w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              {/* Rotating border */}
-              <motion.div
-                className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary via-accent to-primary opacity-50"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              <img 
+                src={logo} 
+                alt="AI Express Logo" 
+                className="w-full h-full object-contain rounded-xl"
               />
-              <Zap className="w-6 h-6 text-white relative z-10" />
             </motion.div>
             <div>
               <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">

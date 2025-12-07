@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import AnimatedLogo from './AnimatedLogo';
 import { Bot } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 const LoadingScreen = () => {
   // Enhanced entrance animation
@@ -42,8 +42,13 @@ const LoadingScreen = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
+            className="mb-8"
           >
-            <AnimatedLogo size="lg" className="mx-auto mb-8" />
+            <img 
+              src={logo} 
+              alt="AI Express Logo" 
+              className="w-48 h-48 mx-auto object-contain"
+            />
           </motion.div>
           
           <motion.h1
