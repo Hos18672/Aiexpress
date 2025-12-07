@@ -21,11 +21,11 @@ const Contact = () => {
       title: t('phone'),
       content: t('contact.info.phone')
     },
-    {
-      icon: "📍",
-      title: t('address'),
-      content: t('contact.info.address')
-    }
+    // {
+    //   icon: "📍",
+    //   title: t('address'),
+    //   content: t('contact.info.address')
+    // }
   ];
 
   return (

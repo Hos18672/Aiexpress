@@ -109,12 +109,12 @@ const Home = () => {
     {
       icon: <Mail className="w-6 h-6 text-primary" />,
       title: t('contact.email') || "Email",
-      content: t('contact.info.email') || "contact@aiexpress.com"
+      content:  "ai-express@outlook.com"
     },
     {
       icon: <Phone className="w-6 h-6 text-primary" />,
       title: t('contact.phone') || "Phone",
-      content: t('contact.info.phone') || "+1 (555) 123-4567"
+      content:  "+43 670 5554177"
     },
     // {
     //   icon: <MapPin className="w-6 h-6 text-primary" />,
@@ -227,7 +227,7 @@ const Home = () => {
               </motion.span>
             </h1>
 
-            <p className="text-xl text-gray-300 mb-6 max-w-2xl leading-relaxed">
+            <p className="text-xl text-gray-300 mb-6 leading-relaxed">
               {t('heroSubtitle')}
             </p>
 

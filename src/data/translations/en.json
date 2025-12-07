@@ -121,8 +121,8 @@
     "bookConsultation": "Book a 30-minute consultation with our AI experts to discuss your business needs and opportunities.",
     "scheduleNow": "Schedule Now",
     "info": {
-      "email": "contact@aiexpress.com",
-      "phone": "+1 (555) 123-4567",
+      "email": "ai-express@outlook.com",
+      "phone": "+43 670 5554177",
       "address": "123 Tech Street, San Francisco, CA"
     }
   },
@@ -174,5 +174,62 @@
     "projects": "Projects",
     "years": "Years",
     "coreValues": "Core Values"
+  },
+  "privacyPolicy": {
+    "nav": "Privacy Policy",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated: December 2024",
+    "introduction": {
+      "title": "Introduction",
+      "content": "We are very pleased that you are interested in our company. Data protection is of particularly high importance to the management of AI Express. Using the internet pages of AI Express is fundamentally possible without providing any personal data. However, if a data subject wishes to make use of special services offered by our company via our website, processing of personal data may become necessary. If processing of personal data becomes necessary and there is no legal basis for such processing, we generally obtain consent from the data subject."
+    },
+    "scope": {
+      "title": "Scope of Processing Personal Data",
+      "content": "We process personal data of our users only insofar as this is necessary for the provision of a functional website as well as our content and services. The processing of personal data of our users is carried out regularly only with the consent of the user. An exception applies in cases where prior consent cannot be obtained for factual reasons and the processing of the data is permitted by law."
+    },
+    "rights": {
+      "title": "Rights of the Data Subject",
+      "item1": "Right of access: You have the right to request confirmation from the controller as to whether personal data concerning you is being processed.",
+      "item2": "Right to rectification: You have the right to request the controller to rectify any inaccurate personal data concerning you.",
+      "item3": "Right to erasure: You have the right to request the controller to erase personal data concerning you without undue delay.",
+      "item4": "Right to restriction of processing: You have the right to request the controller to restrict processing.",
+      "item5": "Right to object: You have the right to object at any time, for reasons arising from your particular situation, to the processing of personal data concerning you."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "content": "The internet pages of AI Express use cookies. Cookies are text files stored via an internet browser on the user's computer system. Numerous internet sites and servers use cookies. Many cookies contain a so-called cookie ID. A cookie ID is a unique identifier of the cookie. It consists of a character string through which internet pages and servers can be assigned to the specific internet browser in which the cookie was stored. This enables visited internet pages and servers to distinguish the individual browser of the user from other internet browsers that contain other cookies. A specific internet browser can be recognized and identified again via the unique cookie ID."
+    },
+    "contact": {
+      "title": "Contact Possibility",
+      "content": "The internet pages of AI Express contain information that enables rapid electronic contact with our company as well as direct communication with us, which also includes a general address of the so-called electronic mail (email address). If a data subject contacts the controller by email or via a contact form, the personal data transmitted by the data subject is automatically stored. These personal data transmitted voluntarily by the data subject to the controller are stored for the purposes of processing or contacting the data subject. There is no disclosure of these personal data to third parties."
+    }
+  },
+  "cookiePolicy": {
+    "nav": "Cookie Policy",
+    "title": "Cookie Policy",
+    "lastUpdated": "Last Updated: December 2024",
+    "whatAreCookies": {
+      "title": "What Are Cookies?",
+      "content": "Cookies are small text files that are stored on your computer or mobile device by websites when you visit them. They are widely used to ensure websites function properly, as well as to provide information about how websites are used, which helps us improve their functionality."
+    },
+    "howWeUse": {
+      "title": "How We Use Cookies",
+      "content": "We use cookies to understand and improve various aspects of our website. Our use of cookies includes:",
+      "item1": "Essential Cookies: These cookies are absolutely necessary for our website to function and enable basic functions such as page navigation and access to secure areas of the website.",
+      "item2": "Performance Cookies: These cookies collect information about how you use our website, such as which pages you visit most frequently. All information collected by these cookies is aggregated and therefore anonymous.",
+      "item3": "Functionality Cookies: These cookies enable our website to remember information that affects the way a website behaves or looks, such as your preferred language or the region you are in."
+    },
+    "thirdParty": {
+      "title": "Third-Party Cookies",
+      "content": "In some special cases, we also use cookies from trusted third parties. For example, we might use Google Analytics to understand how you use our website. Google Analytics placements are from Google Inc. The tracking code they use is set up so that it does not collect personal data such as names, email addresses or phone numbers. Instead, we receive anonymized data that helps us improve the website."
+    },
+    "control": {
+      "title": "Control Over Cookies",
+      "content": "You can control or even reject cookies by adjusting your browser settings. However, note that disabling cookies may affect the functionality of many websites. Most browsers offer you the ability to manage cookies - for example, by rejecting all cookies or being notified when a cookie is sent. The appropriate settings can usually be found in the 'Options' or 'Preferences' menu of your browser."
+    },
+    "changes": {
+      "title": "Changes to This Policy",
+      "content": "We may update this Cookie Policy from time to time. Any changes will be published on this page. We recommend that you check this page regularly for changes to ensure that you are satisfied with the updated information."
+    }
   }
 }

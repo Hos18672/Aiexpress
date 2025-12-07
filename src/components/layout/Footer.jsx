@@ -36,13 +36,15 @@ const Footer = () => {
     { name: t('services'), id: 'services', icon: <Settings className="w-4 h-4" /> },
     { name: t('caseStudies'), id: 'case-studies', icon: <FileText className="w-4 h-4" /> },
     { name: t('about'), id: 'about', icon: <User className="w-4 h-4" /> },
-    { name: t('contact'), id: 'contact', icon: <Users className="w-4 h-4" /> }
+    { name: t('contact'), id: 'contact', icon: <Users className="w-4 h-4" /> },
+    { name: t('privacyPolicy.nav'), path: '/datenschutz', icon: <FileText className="w-4 h-4" /> },
+    { name: t('cookiePolicy.nav'), path: '/cookie-policy', icon: <FileText className="w-4 h-4" /> },
   ];
 
   const contactInfo = [
     { icon: <Mail className="w-5 h-5" />, content: t('contact.info.email') },
     { icon: <Phone className="w-5 h-5" />, content: t('contact.info.phone') },
-    { icon: <MapPin className="w-5 h-5" />, content: t('contact.info.address') }
+    // { icon: <MapPin className="w-5 h-5" />, content: t('contact.info.address') }
   ];
 
   return (
@@ -94,14 +96,24 @@ const Footer = () => {
             <ul className="space-y-2">
               {sectionLinks.map((link, index) => (
                 <li key={index}>
-                  <button 
-                    onClick={() => handleScrollToSection(link.id)}
-                    className="flex items-center text-gray-400 hover:text-primary transition-colors text-left"
-                    aria-label={`Scroll to ${link.name} section`}
-                  >
-                    {link.icon}
-                    <span className="ml-2">{link.name}</span>
-                  </button>
+                  {link.path ? (
+                    <a 
+                      href={link.path}
+                      className="flex items-center text-gray-400 hover:text-primary transition-colors"
+                    >
+                      {link.icon}
+                      <span className="ml-2">{link.name}</span>
+                    </a>
+                  ) : (
+                    <button 
+                      onClick={() => handleScrollToSection(link.id)}
+                      className="flex items-center text-gray-400 hover:text-primary transition-colors text-left"
+                      aria-label={`Scroll to ${link.name} section`}
+                    >
+                      {link.icon}
+                      <span className="ml-2">{link.name}</span>
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
