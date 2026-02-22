@@ -142,6 +142,10 @@
     "errorOccurred": "Error Occurred",
     "errorMessage": "There was an issue sending your message. Please try again."
   },
+  "services": "Services",
+  "caseStudies": "Case Studies",
+  "about": "About",
+  "contact": "Contact",
   "cta": {
     "title": "Launch Your AI Transformation",
     "subtitle": "Join hundreds of forward-thinking companies leveraging AI to drive innovation, efficiency, and exponential growth.",
@@ -175,7 +179,8 @@
     "clients": "Clients",
     "projects": "Projects",
     "years": "Years",
-    "coreValues": "Core Values"
+    "coreValues": "Core Values",
+    "sections": "Sections"
   },
   "privacyPolicy": {
     "nav": "Privacy Policy",
