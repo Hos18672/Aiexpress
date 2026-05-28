@@ -174,7 +174,7 @@ const Home = () => {
 
   return (
     <div className="pt-16 relative overflow-hidden">
-      {/* Animated Background Elements */}
+      <elevenlabs-convai agent-id="agent_3401ksd99d04e0vt6h24ch3q0090"></elevenlabs-convai>      {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-primary/10 blur-3xl rounded-full animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 blur-3xl rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
